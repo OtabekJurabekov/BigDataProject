@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import Sidebar from '@/components/Sidebar'
 import CommandPalette from '@/components/CommandPalette'
 import Footer from '@/components/Footer'
+import MobileMenuButton from '@/components/MobileMenuButton'
 import ChartWithDetails from '@/components/ChartWithDetails'
 import MetricCard from '@/components/MetricCard'
 import { Users, Globe, TrendingUp, BarChart3, Sparkles } from 'lucide-react'
@@ -13,10 +14,21 @@ import { queries } from '@/lib/queries'
 import { queryMetadata } from '@/lib/queryMetadata'
 
 export default function CustomersPage() {
-  const [sidebarOpen, setSidebarOpen] = useState(true)
+  const [sidebarOpen, setSidebarOpen] = useState(false)
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false)
   const [data, setData] = useState<any>({})
   const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      if (window.innerWidth >= 768) {
+        setSidebarOpen(true)
+      }
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -26,6 +38,9 @@ export default function CustomersPage() {
       }
       if (e.key === 'Escape') {
         setCommandPaletteOpen(false)
+        if (window.innerWidth < 768) {
+          setSidebarOpen(false)
+        }
       }
     }
     window.addEventListener('keydown', handleKeyDown)
@@ -73,11 +88,12 @@ export default function CustomersPage() {
   if (loading) {
     return (
       <div className="flex h-screen overflow-hidden bg-[#0a0a0a]">
+        <MobileMenuButton isOpen={sidebarOpen} onToggle={() => setSidebarOpen(!sidebarOpen)} />
         <Sidebar isOpen={sidebarOpen} onToggle={() => setSidebarOpen(!sidebarOpen)} />
-        <div className="flex-1 p-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="flex-1 p-4 sm:p-6 md:p-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
             {[...Array(8)].map((_, i) => (
-              <div key={i} className="h-32 bg-white/5 rounded-xl animate-pulse" />
+              <div key={i} className="h-24 sm:h-28 md:h-32 bg-white/5 rounded-xl animate-pulse" />
             ))}
           </div>
         </div>
@@ -89,11 +105,12 @@ export default function CustomersPage() {
 
   return (
     <div className="flex flex-col h-screen overflow-hidden bg-[#0a0a0a]">
+      <MobileMenuButton isOpen={sidebarOpen} onToggle={() => setSidebarOpen(!sidebarOpen)} />
       <div className="flex flex-1 overflow-hidden">
         <Sidebar isOpen={sidebarOpen} onToggle={() => setSidebarOpen(!sidebarOpen)} />
         <main className="flex-1 overflow-auto">
           <div className="min-h-full flex flex-col">
-            <div className="p-6 md:p-8 space-y-8">
+            <div className="p-4 sm:p-5 md:p-6 lg:p-8 space-y-4 sm:space-y-6 md:space-y-8">
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -108,7 +125,7 @@ export default function CustomersPage() {
             </div>
             <div className="flex items-center gap-4">
               <motion.div
-                className="w-1 h-12 rounded-full"
+                className="w-1 h-8 sm:h-10 md:h-12 rounded-full"
                 style={{
                   background: 'linear-gradient(180deg, #a78bfa 0%, #06b6d4 50%, #ec4899 100%)',
                 }}
@@ -122,10 +139,10 @@ export default function CustomersPage() {
                 }}
               />
               <div>
-                <h1 className="text-5xl font-extrabold gradient-text tracking-tight">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold gradient-text tracking-tight">
                   Customer Analysis
                 </h1>
-                <p className="text-gray-300/90 mt-2 text-lg">
+                <p className="text-gray-300/90 mt-1 sm:mt-1.5 md:mt-2 text-xs sm:text-sm md:text-base lg:text-lg">
                   Comprehensive analysis of customer naming conventions, patterns, and textual characteristics
                 </p>
               </div>
@@ -133,7 +150,7 @@ export default function CustomersPage() {
           </motion.div>
 
           {/* Key Metrics */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5 lg:gap-6">
             <MetricCard
               title="Total Customers"
               value={data.customerNameLength?.length || 0}
@@ -178,7 +195,7 @@ export default function CustomersPage() {
               Advanced Analytics
             </h2>
             
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
               {/* Customer Name Length Distribution */}
               <ChartWithDetails
                 title="Customer Name Length Distribution"

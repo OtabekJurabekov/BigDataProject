@@ -1,6 +1,7 @@
 'use client'
 
 import { motion, AnimatePresence } from 'framer-motion'
+import { useState, useEffect } from 'react'
 import { 
   LayoutDashboard, 
   Users, 
@@ -32,25 +33,48 @@ const menuItems = [
 
 export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
   const pathname = usePathname()
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   return (
-    <motion.aside
-      initial={false}
-      animate={{ width: isOpen ? 260 : 80 }}
-      transition={{ type: "spring", stiffness: 300, damping: 30 }}
-      className="relative border-r overflow-hidden"
-      style={{
-        background: 'linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.12) 100%)',
-        backdropFilter: 'blur(40px) saturate(200%)',
-        borderColor: 'rgba(255,255,255,0.25)',
-        boxShadow: `
-          inset -1px 0 0 0 rgba(255,255,255,0.15),
-          12px 0 48px 0 rgba(0,0,0,0.5),
-          0 0 0 1px rgba(255,255,255,0.1) inset,
-          0 0 80px -20px rgba(139, 92, 246, 0.2)
-        `,
-      }}
-    >
+    <>
+      {/* Mobile overlay */}
+      {isOpen && isMobile && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={onToggle}
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden"
+        />
+      )}
+      
+      <motion.aside
+        initial={false}
+        animate={{ 
+          width: isOpen ? (isMobile ? 280 : 260) : (isMobile ? 0 : 80),
+          x: isMobile ? (isOpen ? 0 : -280) : 0
+        }}
+        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+        className="relative border-r overflow-hidden md:relative fixed md:static inset-y-0 left-0 z-50 md:z-auto"
+        style={{
+          background: 'linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.12) 100%)',
+          backdropFilter: 'blur(40px) saturate(200%)',
+          borderColor: 'rgba(255,255,255,0.25)',
+          boxShadow: `
+            inset -1px 0 0 0 rgba(255,255,255,0.15),
+            12px 0 48px 0 rgba(0,0,0,0.5),
+            0 0 0 1px rgba(255,255,255,0.1) inset,
+            0 0 80px -20px rgba(139, 92, 246, 0.2)
+          `,
+        }}
+      >
       {/* Animated background gradient */}
       <motion.div
         className="absolute inset-0 opacity-30"
@@ -69,12 +93,12 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
       />
       
       <div className="flex h-full flex-col relative z-10">
-        <div className="flex items-center justify-between p-5 border-b" style={{ borderColor: 'rgba(255,255,255,0.1)' }}>
+        <div className="flex items-center justify-between p-3 md:p-5 border-b" style={{ borderColor: 'rgba(255,255,255,0.1)' }}>
           {isOpen && (
             <motion.h1
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
-              className="text-xl font-bold gradient-text flex items-center gap-2"
+              className="text-lg md:text-xl font-bold gradient-text flex items-center gap-2"
             >
               <motion.div
                 animate={{ 
@@ -86,44 +110,48 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
                   scale: { duration: 2, repeat: Infinity, ease: "easeInOut" }
                 }}
               >
-                <Sparkles size={20} className="text-purple-400 drop-shadow-[0_0_8px_rgba(139,92,246,0.6)]" />
+                <Sparkles size={18} className="md:w-5 md:h-5 text-purple-400 drop-shadow-[0_0_8px_rgba(139,92,246,0.6)]" />
               </motion.div>
-              <span className="text-glow">Classic Models</span>
+              <span className="text-glow hidden sm:inline">Classic Models</span>
             </motion.h1>
           )}
           <motion.button
             onClick={onToggle}
-            whileHover={{ scale: 1.1, rotate: 180 }}
+            whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            className="p-2.5 rounded-xl transition-all text-white/80 hover:text-white relative overflow-hidden group"
+            className="p-2.5 md:p-2.5 rounded-xl transition-all text-white/80 hover:text-white relative overflow-hidden group min-w-[44px] min-h-[44px] flex items-center justify-center"
             style={{
               background: 'rgba(255,255,255,0.1)',
               backdropFilter: 'blur(10px)',
             }}
-            aria-label={isOpen ? 'Collapse sidebar' : 'Expand sidebar'}
+            aria-label={isOpen ? 'Close sidebar' : 'Open sidebar'}
             aria-expanded={isOpen}
           >
             <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity" />
             <div className="relative z-10">
-              {isOpen ? <ChevronLeft size={20} aria-hidden="true" /> : <ChevronRight size={20} aria-hidden="true" />}
+              {isOpen ? <ChevronLeft size={20} aria-hidden="true" className="md:w-5 md:h-5" /> : <ChevronRight size={20} aria-hidden="true" className="md:w-5 md:h-5" />}
             </div>
           </motion.button>
         </div>
 
-        <nav className="flex-1 px-3 py-5 space-y-2 overflow-y-auto">
+        <nav className="flex-1 px-2 md:px-3 py-3 md:py-5 space-y-1.5 md:space-y-2 overflow-y-auto">
           {menuItems.map((item, index) => {
             const Icon = item.icon
             const isActive = pathname === item.href
 
             return (
-              <Link key={item.href} href={item.href} aria-label={item.label}>
+              <Link key={item.href} href={item.href} aria-label={item.label} onClick={() => {
+                if (isMobile) {
+                  onToggle()
+                }
+              }}>
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  whileHover={{ x: 6, scale: 1.02 }}
+                  whileHover={{ x: !isMobile ? 6 : 0, scale: !isMobile ? 1.02 : 1 }}
                   whileTap={{ scale: 0.98 }}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all cursor-pointer relative overflow-hidden group ${
+                  className={`w-full flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2.5 md:py-3 rounded-xl transition-all cursor-pointer relative overflow-hidden group min-h-[44px] ${
                     isActive
                       ? ''
                       : 'hover:bg-white/5'
@@ -170,27 +198,27 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
                   )}
                   
                   <motion.div
-                    className={`p-2 rounded-lg relative z-10 ${
+                    className={`p-1.5 md:p-2 rounded-lg relative z-10 flex-shrink-0 ${
                       isActive ? 'bg-white/20' : 'bg-white/5 group-hover:bg-white/10'
                     }`}
-                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    whileHover={{ scale: !isMobile ? 1.1 : 1, rotate: !isMobile ? 5 : 0 }}
                     transition={{ type: "spring", stiffness: 400, damping: 15 }}
                   >
                     <Icon
-                      size={20}
-                      className={isActive ? 'text-white' : 'text-gray-300 group-hover:text-white'}
+                      size={18}
+                      className={`md:w-5 md:h-5 ${isActive ? 'text-white' : 'text-gray-300 group-hover:text-white'}`}
                       strokeWidth={isActive ? 2.5 : 2}
                       aria-hidden="true"
                     />
                   </motion.div>
                   
                   <AnimatePresence>
-                    {isOpen && (
+                    {(isOpen || isMobile) && (
                       <motion.span
                         initial={{ opacity: 0, width: 0 }}
                         animate={{ opacity: 1, width: 'auto' }}
                         exit={{ opacity: 0, width: 0 }}
-                        className={`font-semibold relative z-10 ${
+                        className={`text-sm md:text-base font-semibold relative z-10 ${
                           isActive ? 'text-white' : 'text-gray-200 group-hover:text-white'
                         }`}
                       >
@@ -212,12 +240,12 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="p-5 border-t relative"
+          className="p-3 md:p-5 border-t relative"
           style={{ borderColor: 'rgba(255,255,255,0.1)' }}
         >
           {isOpen ? (
             <>
-              <div className="flex items-center gap-2 text-xs text-gray-300/80 mb-4">
+              <div className="hidden md:flex items-center gap-2 text-xs text-gray-300/80 mb-3 md:mb-4">
                 <kbd className="px-2 py-1 rounded bg-white/10 text-white/90 font-mono text-[10px] border border-white/20">
                   ⌘
                 </kbd>
@@ -228,22 +256,22 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
                 <span className="ml-2">for commands</span>
               </div>
               <motion.div
-                className="flex items-center gap-3 p-3 rounded-xl relative overflow-hidden group"
+                className="flex items-center gap-2 md:gap-3 p-2 md:p-3 rounded-xl relative overflow-hidden group"
                 style={{
                   background: 'rgba(255,255,255,0.08)',
                   backdropFilter: 'blur(10px)',
                   border: '1px solid rgba(255,255,255,0.1)',
                 }}
-                whileHover={{ scale: 1.02 }}
+                whileHover={{ scale: !isMobile ? 1.02 : 1 }}
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity" />
                 <motion.div
-                  className="relative w-10 h-10 rounded-xl overflow-hidden z-10"
+                  className="relative w-8 h-8 md:w-10 md:h-10 rounded-xl overflow-hidden z-10 flex-shrink-0"
                   style={{
                     border: '2px solid rgba(255,255,255,0.3)',
                     boxShadow: '0 4px 16px rgba(139, 92, 246, 0.3), inset 0 1px 0 rgba(255,255,255,0.2)',
                   }}
-                  whileHover={{ scale: 1.1, rotate: 2 }}
+                  whileHover={{ scale: !isMobile ? 1.1 : 1, rotate: !isMobile ? 2 : 0 }}
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-purple-400/20 to-cyan-400/20" />
                   <img
@@ -253,25 +281,25 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
                 </motion.div>
-                <div className="flex-1 relative z-10">
-                  <p className="text-xs text-gray-400 mb-0.5">Created by</p>
-                  <p className="text-sm font-semibold text-white">Otabek Jurabekov</p>
+                <div className="flex-1 relative z-10 min-w-0">
+                  <p className="text-[10px] md:text-xs text-gray-400 mb-0.5">Created by</p>
+                  <p className="text-xs md:text-sm font-semibold text-white truncate">Otabek Jurabekov</p>
                 </div>
               </motion.div>
             </>
           ) : (
             <motion.div
               className="flex justify-center"
-              whileHover={{ scale: 1.1 }}
+              whileHover={{ scale: !isMobile ? 1.1 : 1 }}
             >
               <motion.a
                 href="/overview"
-                className="w-10 h-10 rounded-xl overflow-hidden cursor-pointer relative"
+                className="w-8 h-8 md:w-10 md:h-10 rounded-xl overflow-hidden cursor-pointer relative min-w-[32px] min-h-[32px] md:min-w-[40px] md:min-h-[40px]"
                 style={{
                   border: '2px solid rgba(255,255,255,0.3)',
                   boxShadow: '0 4px 16px rgba(139, 92, 246, 0.3), inset 0 1px 0 rgba(255,255,255,0.2)',
                 }}
-                whileHover={{ rotate: 5 }}
+                whileHover={{ rotate: !isMobile ? 5 : 0 }}
                 aria-label="View profile - Otabek Jurabekov"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-purple-400/20 to-cyan-400/20 z-10" />
@@ -287,5 +315,6 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
         </motion.div>
       </div>
     </motion.aside>
+    </>
   )
 }

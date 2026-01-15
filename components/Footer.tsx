@@ -48,12 +48,12 @@ export default function Footer() {
         backdropFilter: 'blur(30px) saturate(200%)',
         borderTop: '1px solid rgba(255,255,255,0.1)',
       }}>
-        <div className="max-w-7xl mx-auto px-6 md:px-8 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-6 sm:py-8 md:py-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mb-4 sm:mb-6 md:mb-8">
             {/* About Section */}
             <div>
               <motion.h3 
-                className="text-lg font-bold text-white mb-4 flex items-center gap-2"
+                className="text-base sm:text-lg font-bold text-white mb-3 sm:mb-4 flex items-center gap-2"
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -61,7 +61,7 @@ export default function Footer() {
                 <span className="gradient-text">Classic Models Analytics</span>
               </motion.h3>
               <motion.p 
-                className="text-sm text-gray-300/80 leading-relaxed"
+                className="text-xs sm:text-sm text-gray-300/80 leading-relaxed"
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -75,14 +75,14 @@ export default function Footer() {
             {/* Navigation */}
             <div>
               <motion.h3 
-                className="text-sm font-semibold text-white mb-4 uppercase tracking-wider"
+                className="text-xs sm:text-sm font-semibold text-white mb-3 sm:mb-4 uppercase tracking-wider"
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
               >
                 Navigation
               </motion.h3>
-              <ul className="space-y-2">
+              <ul className="space-y-1.5 sm:space-y-2">
                 {links.navigation.map((link, index) => (
                   <motion.li
                     key={link.name}
@@ -93,11 +93,11 @@ export default function Footer() {
                   >
                     <a
                       href={link.href}
-                      className="text-sm text-gray-400 hover:text-white transition-colors flex items-center gap-2 group"
+                      className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors flex items-center gap-1.5 sm:gap-2 group min-h-[36px] sm:min-h-[40px]"
                       aria-label={`Navigate to ${link.name}`}
                     >
                       <span>{link.name}</span>
-                      <ExternalLink size={12} className="opacity-0 group-hover:opacity-100 transition-opacity" aria-hidden="true" />
+                      <ExternalLink size={10} className="sm:w-3 sm:h-3 opacity-0 group-hover:opacity-100 transition-opacity" aria-hidden="true" />
                     </a>
                   </motion.li>
                 ))}
@@ -107,14 +107,14 @@ export default function Footer() {
             {/* Social Links */}
             <div>
               <motion.h3 
-                className="text-sm font-semibold text-white mb-4 uppercase tracking-wider"
+                className="text-xs sm:text-sm font-semibold text-white mb-3 sm:mb-4 uppercase tracking-wider"
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
               >
                 Connect
               </motion.h3>
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-2 sm:gap-2.5 md:gap-3">
                 {links.social.map((link, index) => {
                   const Icon = link.icon
                   return (
@@ -127,9 +127,9 @@ export default function Footer() {
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
                       transition={{ delay: index * 0.05 }}
-                      whileHover={{ scale: 1.1, y: -2 }}
+                      whileHover={{ scale: window.innerWidth >= 768 ? 1.1 : 1, y: window.innerWidth >= 768 ? -2 : 0 }}
                       whileTap={{ scale: 0.95 }}
-                      className="p-2.5 rounded-xl transition-all group relative overflow-hidden"
+                      className="p-2 sm:p-2.5 rounded-lg md:rounded-xl transition-all group relative overflow-hidden min-w-[44px] min-h-[44px] flex items-center justify-center"
                       style={{
                         background: 'rgba(255,255,255,0.12)',
                         backdropFilter: 'blur(12px)',
@@ -139,7 +139,7 @@ export default function Footer() {
                       aria-label={`Visit ${link.name} profile`}
                     >
                       <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity" />
-                      <Icon size={18} className="text-gray-400 group-hover:text-white relative z-10 transition-colors" aria-hidden="true" />
+                      <Icon size={16} className="sm:w-4 sm:h-4 md:w-[18px] md:h-[18px] text-gray-400 group-hover:text-white relative z-10 transition-colors" aria-hidden="true" />
                     </motion.a>
                   )
                 })}
@@ -149,22 +149,22 @@ export default function Footer() {
 
           {/* Bottom Bar */}
           <motion.div 
-            className="pt-8 border-t flex flex-col md:flex-row justify-between items-center gap-4"
+            className="pt-4 sm:pt-6 md:pt-8 border-t flex flex-col md:flex-row justify-between items-center gap-3 sm:gap-4"
             style={{ borderColor: 'rgba(255,255,255,0.1)' }}
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
           >
-            <div className="text-sm text-gray-400">
+            <div className="text-xs sm:text-sm text-gray-400 text-center md:text-left">
               <p>
                 © {currentYear} <span className="text-white font-semibold">Otabek Jurabekov</span> • PDP University (Group 24-303)
               </p>
-              <p className="text-xs mt-1 text-gray-500">
+              <p className="text-[10px] sm:text-xs mt-1 text-gray-500">
                 Data Analytics Project • Classic Models Database Analysis
               </p>
             </div>
-            <div className="flex items-center gap-2 text-xs text-gray-500">
-              <Briefcase size={14} />
+            <div className="flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs text-gray-500">
+              <Briefcase size={12} className="sm:w-3.5 sm:h-3.5" />
               <span>Built with Next.js, TypeScript & MySQL</span>
             </div>
           </motion.div>

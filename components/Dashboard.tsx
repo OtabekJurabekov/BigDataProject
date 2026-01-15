@@ -26,6 +26,14 @@ interface AnalyticsData {
 export default function Dashboard() {
   const [data, setData] = useState<AnalyticsData>({})
   const [loading, setLoading] = useState(true)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -80,16 +88,16 @@ export default function Dashboard() {
   const startCharsData = data.productNameStartChars || []
 
   return (
-    <div className="p-6 md:p-8 space-y-8">
+    <div className="p-4 sm:p-5 md:p-6 lg:p-8 space-y-4 sm:space-y-6 md:space-y-8">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="space-y-4 relative"
+        className="space-y-2 sm:space-y-3 md:space-y-4 relative"
       >
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
           <motion.div
-            className="w-1 h-12 rounded-full"
+            className="w-1 h-8 sm:h-10 md:h-12 rounded-full"
             style={{
               background: 'linear-gradient(180deg, #a78bfa 0%, #06b6d4 50%, #ec4899 100%)',
             }}
@@ -104,7 +112,7 @@ export default function Dashboard() {
           />
           <div>
             <motion.h1 
-              className="text-5xl font-extrabold gradient-text tracking-tight"
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold gradient-text tracking-tight"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.1 }}
@@ -112,7 +120,7 @@ export default function Dashboard() {
               Analytics Dashboard
             </motion.h1>
             <motion.p 
-              className="text-gray-300/90 mt-2 text-lg"
+              className="text-gray-300/90 mt-1 sm:mt-1.5 md:mt-2 text-xs sm:text-sm md:text-base lg:text-lg"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 }}
@@ -142,7 +150,7 @@ export default function Dashboard() {
       </motion.div>
 
       {/* Key Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5 lg:gap-6">
         <Link href="/customers" aria-label="View customer analytics">
           <MetricCard
             title="Customers"
@@ -186,16 +194,16 @@ export default function Dashboard() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 }}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-3.5 md:gap-4"
       >
         <Link href="/customers" aria-label="Navigate to customer analytics page">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            whileHover={{ scale: 1.05, x: 6, y: -2 }}
+            whileHover={{ scale: !isMobile ? 1.05 : 1, x: !isMobile ? 6 : 0, y: !isMobile ? -2 : 0 }}
             whileTap={{ scale: 0.98 }}
-            className="group rounded-2xl p-5 overflow-hidden cursor-pointer relative"
+            className="group rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-5 overflow-hidden cursor-pointer relative min-h-[80px] sm:min-h-[100px]"
             style={{
               background: 'linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.06) 100%)',
               backdropFilter: 'blur(24px) saturate(180%)',
@@ -219,24 +227,25 @@ export default function Dashboard() {
               }}
             />
             <div className="flex items-center justify-between relative z-10">
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 sm:gap-2.5 md:gap-3">
                 <motion.div
-                  className="p-2.5 rounded-xl"
+                  className="p-2 sm:p-2.5 rounded-lg md:rounded-xl"
                   style={{
                     background: 'linear-gradient(135deg, rgba(139,92,246,0.3) 0%, rgba(6,182,212,0.3) 100%)',
                     boxShadow: '0 4px 16px 0 rgba(139,92,246,0.3)',
                   }}
-                  whileHover={{ scale: 1.15, rotate: 5 }}
+                  whileHover={{ scale: !isMobile ? 1.15 : 1, rotate: !isMobile ? 5 : 0 }}
                 >
-                  <Users className="text-white" size={22} strokeWidth={2.5} aria-hidden="true" />
+                  <Users className="text-white" size={18} className="sm:w-5 sm:h-5 md:w-[22px] md:h-[22px]" strokeWidth={2.5} aria-hidden="true" />
                 </motion.div>
-                <span className="text-white font-semibold text-lg">Customers</span>
+                <span className="text-white font-semibold text-sm sm:text-base md:text-lg">Customers</span>
               </div>
               <motion.div
                 animate={{ x: [0, 4, 0] }}
                 transition={{ duration: 1.5, repeat: Infinity }}
+                className="hidden sm:block"
               >
-                <ArrowRight className="text-gray-400 group-hover:text-white transition-colors" size={20} aria-hidden="true" />
+                <ArrowRight className="text-gray-400 group-hover:text-white transition-colors" size={18} className="md:w-5 md:h-5" aria-hidden="true" />
               </motion.div>
             </div>
           </motion.div>
@@ -246,9 +255,9 @@ export default function Dashboard() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
-            whileHover={{ scale: 1.05, x: 6, y: -2 }}
+            whileHover={{ scale: !isMobile ? 1.05 : 1, x: !isMobile ? 6 : 0, y: !isMobile ? -2 : 0 }}
             whileTap={{ scale: 0.98 }}
-            className="group rounded-2xl p-5 overflow-hidden cursor-pointer relative"
+            className="group rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-5 overflow-hidden cursor-pointer relative min-h-[80px] sm:min-h-[100px]"
             style={{
               background: 'linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.06) 100%)',
               backdropFilter: 'blur(24px) saturate(180%)',
@@ -272,24 +281,25 @@ export default function Dashboard() {
               }}
             />
             <div className="flex items-center justify-between relative z-10">
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 sm:gap-2.5 md:gap-3">
                 <motion.div
-                  className="p-2.5 rounded-xl"
+                  className="p-2 sm:p-2.5 rounded-lg md:rounded-xl"
                   style={{
                     background: 'linear-gradient(135deg, rgba(139,92,246,0.3) 0%, rgba(236,72,153,0.3) 100%)',
                     boxShadow: '0 4px 16px 0 rgba(236,72,153,0.3)',
                   }}
-                  whileHover={{ scale: 1.15, rotate: 5 }}
+                  whileHover={{ scale: !isMobile ? 1.15 : 1, rotate: !isMobile ? 5 : 0 }}
                 >
-                  <Package className="text-white" size={22} strokeWidth={2.5} aria-hidden="true" />
+                  <Package className="text-white" size={18} className="sm:w-5 sm:h-5 md:w-[22px] md:h-[22px]" strokeWidth={2.5} aria-hidden="true" />
                 </motion.div>
-                <span className="text-white font-semibold text-lg">Products</span>
+                <span className="text-white font-semibold text-sm sm:text-base md:text-lg">Products</span>
               </div>
               <motion.div
                 animate={{ x: [0, 4, 0] }}
                 transition={{ duration: 1.5, repeat: Infinity, delay: 0.2 }}
+                className="hidden sm:block"
               >
-                <ArrowRight className="text-gray-400 group-hover:text-white transition-colors" size={20} aria-hidden="true" />
+                <ArrowRight className="text-gray-400 group-hover:text-white transition-colors" size={18} className="md:w-5 md:h-5" aria-hidden="true" />
               </motion.div>
             </div>
           </motion.div>
@@ -299,9 +309,9 @@ export default function Dashboard() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7 }}
-            whileHover={{ scale: 1.05, x: 6, y: -2 }}
+            whileHover={{ scale: !isMobile ? 1.05 : 1, x: !isMobile ? 6 : 0, y: !isMobile ? -2 : 0 }}
             whileTap={{ scale: 0.98 }}
-            className="group rounded-2xl p-5 overflow-hidden cursor-pointer relative"
+            className="group rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-5 overflow-hidden cursor-pointer relative min-h-[80px] sm:min-h-[100px]"
             style={{
               background: 'linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.06) 100%)',
               backdropFilter: 'blur(24px) saturate(180%)',
@@ -325,24 +335,25 @@ export default function Dashboard() {
               }}
             />
             <div className="flex items-center justify-between relative z-10">
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 sm:gap-2.5 md:gap-3">
                 <motion.div
-                  className="p-2.5 rounded-xl"
+                  className="p-2 sm:p-2.5 rounded-lg md:rounded-xl"
                   style={{
                     background: 'linear-gradient(135deg, rgba(59,130,246,0.3) 0%, rgba(6,182,212,0.3) 100%)',
                     boxShadow: '0 4px 16px 0 rgba(59,130,246,0.3)',
                   }}
-                  whileHover={{ scale: 1.15, rotate: 5 }}
+                  whileHover={{ scale: !isMobile ? 1.15 : 1, rotate: !isMobile ? 5 : 0 }}
                 >
-                  <Building2 className="text-white" size={22} strokeWidth={2.5} aria-hidden="true" />
+                  <Building2 className="text-white" size={18} className="sm:w-5 sm:h-5 md:w-[22px] md:h-[22px]" strokeWidth={2.5} aria-hidden="true" />
                 </motion.div>
-                <span className="text-white font-semibold text-lg">Offices</span>
+                <span className="text-white font-semibold text-sm sm:text-base md:text-lg">Offices</span>
               </div>
               <motion.div
                 animate={{ x: [0, 4, 0] }}
                 transition={{ duration: 1.5, repeat: Infinity, delay: 0.4 }}
+                className="hidden sm:block"
               >
-                <ArrowRight className="text-gray-400 group-hover:text-white transition-colors" size={20} aria-hidden="true" />
+                <ArrowRight className="text-gray-400 group-hover:text-white transition-colors" size={18} className="md:w-5 md:h-5" aria-hidden="true" />
               </motion.div>
             </div>
           </motion.div>
@@ -352,9 +363,9 @@ export default function Dashboard() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8 }}
-            whileHover={{ scale: 1.05, x: 6, y: -2 }}
+            whileHover={{ scale: !isMobile ? 1.05 : 1, x: !isMobile ? 6 : 0, y: !isMobile ? -2 : 0 }}
             whileTap={{ scale: 0.98 }}
-            className="group rounded-2xl p-5 overflow-hidden cursor-pointer relative"
+            className="group rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-5 overflow-hidden cursor-pointer relative min-h-[80px] sm:min-h-[100px]"
             style={{
               background: 'linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.06) 100%)',
               backdropFilter: 'blur(24px) saturate(180%)',
@@ -378,24 +389,25 @@ export default function Dashboard() {
               }}
             />
             <div className="flex items-center justify-between relative z-10">
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 sm:gap-2.5 md:gap-3">
                 <motion.div
-                  className="p-2.5 rounded-xl"
+                  className="p-2 sm:p-2.5 rounded-lg md:rounded-xl"
                   style={{
                     background: 'linear-gradient(135deg, rgba(236,72,153,0.3) 0%, rgba(139,92,246,0.3) 100%)',
                     boxShadow: '0 4px 16px 0 rgba(236,72,153,0.3)',
                   }}
-                  whileHover={{ scale: 1.15, rotate: 5 }}
+                  whileHover={{ scale: !isMobile ? 1.15 : 1, rotate: !isMobile ? 5 : 0 }}
                 >
-                  <Users className="text-white" size={22} strokeWidth={2.5} aria-hidden="true" />
+                  <Users className="text-white" size={18} className="sm:w-5 sm:h-5 md:w-[22px] md:h-[22px]" strokeWidth={2.5} aria-hidden="true" />
                 </motion.div>
-                <span className="text-white font-semibold text-lg">Employees</span>
+                <span className="text-white font-semibold text-sm sm:text-base md:text-lg">Employees</span>
               </div>
               <motion.div
                 animate={{ x: [0, 4, 0] }}
                 transition={{ duration: 1.5, repeat: Infinity, delay: 0.6 }}
+                className="hidden sm:block"
               >
-                <ArrowRight className="text-gray-400 group-hover:text-white transition-colors" size={20} aria-hidden="true" />
+                <ArrowRight className="text-gray-400 group-hover:text-white transition-colors" size={18} className="md:w-5 md:h-5" aria-hidden="true" />
               </motion.div>
             </div>
           </motion.div>
@@ -403,9 +415,9 @@ export default function Dashboard() {
       </motion.div>
 
       {/* Charts Grid */}
-      <div className="space-y-6">
-        <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-          <Sparkles className="text-purple-400" size={24} />
+      <div className="space-y-4 sm:space-y-5 md:space-y-6">
+        <h2 className="text-xl sm:text-2xl font-bold text-white flex items-center gap-2">
+          <Sparkles className="text-purple-400" size={20} className="sm:w-5 sm:h-5 md:w-6 md:h-6" />
           Key Visualizations
         </h2>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

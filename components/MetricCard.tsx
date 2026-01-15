@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { useState, useEffect } from 'react'
 import { LucideIcon } from 'lucide-react'
 
 interface MetricCardProps {
@@ -18,6 +19,15 @@ export default function MetricCard({
   trend,
   delay = 0,
 }: MetricCardProps) {
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20, scale: 0.95 }}
@@ -29,9 +39,9 @@ export default function MetricCard({
         damping: 15
       }}
       whileHover={{ 
-        y: -16, 
-        scale: 1.05,
-        rotate: 0.5,
+        y: !isMobile ? -16 : 0, 
+        scale: !isMobile ? 1.05 : 1,
+        rotate: !isMobile ? 0.5 : 0,
         transition: { 
           type: "spring",
           stiffness: 300,
@@ -39,7 +49,7 @@ export default function MetricCard({
         }
       }}
       whileTap={{ scale: 0.98 }}
-      className="group relative rounded-2xl p-6 overflow-hidden cursor-pointer"
+      className="group relative rounded-xl md:rounded-2xl p-4 sm:p-5 md:p-6 overflow-hidden cursor-pointer"
       style={{
         background: 'linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.06) 100%)',
         backdropFilter: 'blur(32px) saturate(200%)',
@@ -94,10 +104,10 @@ export default function MetricCard({
       />
       
       <div className="relative z-10">
-        <div className="flex items-center justify-between mb-5">
+        <div className="flex items-center justify-between mb-3 sm:mb-4 md:mb-5">
           <motion.div 
-            className="p-3.5 rounded-xl backdrop-blur-md relative overflow-hidden"
-            whileHover={{ scale: 1.1, rotate: 5 }}
+            className="p-2 sm:p-2.5 md:p-3.5 rounded-lg md:rounded-xl backdrop-blur-md relative overflow-hidden"
+            whileHover={{ scale: !isMobile ? 1.1 : 1, rotate: !isMobile ? 5 : 0 }}
             style={{
               background: 'linear-gradient(135deg, rgba(139,92,246,0.45) 0%, rgba(6,182,212,0.45) 100%)',
               boxShadow: `
@@ -108,11 +118,11 @@ export default function MetricCard({
             }}
           >
             <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-            <Icon className="text-white relative z-10" size={22} strokeWidth={2.5} />
+            <Icon className="text-white relative z-10" size={18} className="sm:w-5 sm:h-5 md:w-[22px] md:h-[22px]" strokeWidth={2.5} />
           </motion.div>
           {trend && (
             <motion.span 
-              className="text-xs font-bold text-white px-3 py-1.5 rounded-lg backdrop-blur-md flex items-center gap-1"
+              className="text-[10px] sm:text-xs font-bold text-white px-2 sm:px-2.5 md:px-3 py-1 sm:py-1.5 rounded-md md:rounded-lg backdrop-blur-md flex items-center gap-1"
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: delay + 0.2 }}
@@ -127,12 +137,12 @@ export default function MetricCard({
           )}
         </div>
         
-        <div className="space-y-2.5">
-          <p className="text-sm text-gray-300/90 font-medium tracking-wide uppercase text-xs">
+        <div className="space-y-1.5 sm:space-y-2 md:space-y-2.5">
+          <p className="text-[10px] sm:text-xs md:text-sm text-gray-300/90 font-medium tracking-wide uppercase">
             {title}
           </p>
           <motion.p 
-            className="text-4xl font-bold text-white tracking-tight"
+            className="text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-tight"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: delay + 0.1 }}

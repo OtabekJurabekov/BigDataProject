@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { useState, useEffect } from 'react'
 import {
   BarChart,
   Bar,
@@ -54,6 +55,26 @@ export default function ChartCard({
   yKey,
   delay = 0,
 }: ChartCardProps) {
+  const [isMobile, setIsMobile] = useState(false)
+  const [chartHeight, setChartHeight] = useState(320)
+
+  useEffect(() => {
+    const updateDimensions = () => {
+      const mobile = window.innerWidth < 768
+      setIsMobile(mobile)
+      if (mobile) {
+        setChartHeight(250)
+      } else if (window.innerWidth < 1024) {
+        setChartHeight(280)
+      } else {
+        setChartHeight(320)
+      }
+    }
+    updateDimensions()
+    window.addEventListener('resize', updateDimensions)
+    return () => window.removeEventListener('resize', updateDimensions)
+  }, [])
+
   // Truncate long labels
   const processedData = data.map((item) => ({
     ...item,
@@ -260,7 +281,7 @@ export default function ChartCard({
         initial={{ opacity: 0, y: 20, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ delay }}
-        className="group rounded-2xl p-6 overflow-hidden relative"
+        className="group rounded-xl md:rounded-2xl p-4 sm:p-5 md:p-6 overflow-hidden relative"
         style={{
           background: 'linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.06) 100%)',
           backdropFilter: 'blur(32px) saturate(200%)',
@@ -273,8 +294,8 @@ export default function ChartCard({
           `,
         }}
         whileHover={{
-          scale: 1.01,
-          y: -4,
+          scale: !isMobile ? 1.01 : 1,
+          y: !isMobile ? -4 : 0,
           transition: {
             type: "spring",
             stiffness: 300,
@@ -283,7 +304,7 @@ export default function ChartCard({
         }}
       >
         <motion.h3 
-          className="text-xl font-bold mb-6 text-white relative z-10 flex items-center gap-3"
+          className="text-base sm:text-lg md:text-xl font-bold mb-3 sm:mb-4 md:mb-6 text-white relative z-10 flex items-center gap-2 md:gap-3"
           initial={{ opacity: 0, x: -10 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: delay + 0.1 }}
@@ -291,7 +312,7 @@ export default function ChartCard({
           <span className="gradient-text">{title}</span>
         </motion.h3>
         <div className="relative z-10">
-          <ResponsiveContainer width="100%" height={320}>
+          <ResponsiveContainer width="100%" height={chartHeight}>
             {renderChart()}
           </ResponsiveContainer>
         </div>
@@ -301,7 +322,7 @@ export default function ChartCard({
 
   return (
     <div className="relative z-10">
-      <ResponsiveContainer width="100%" height={320}>
+      <ResponsiveContainer width="100%" height={chartHeight}>
         {renderChart()}
       </ResponsiveContainer>
     </div>

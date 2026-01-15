@@ -30,8 +30,23 @@ import {
 import Link from 'next/link'
 
 export default function OverviewPage() {
-  const [sidebarOpen, setSidebarOpen] = useState(true)
+  const [sidebarOpen, setSidebarOpen] = useState(false)
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    // Set sidebar open by default on desktop, closed on mobile
+    const checkMobile = () => {
+      const mobile = window.innerWidth < 768
+      setIsMobile(mobile)
+      if (!mobile) {
+        setSidebarOpen(true)
+      }
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -41,6 +56,9 @@ export default function OverviewPage() {
       }
       if (e.key === 'Escape') {
         setCommandPaletteOpen(false)
+        if (window.innerWidth < 768) {
+          setSidebarOpen(false)
+        }
       }
     }
     window.addEventListener('keydown', handleKeyDown)
@@ -139,12 +157,30 @@ export default function OverviewPage() {
     <>
       <StructuredData data={structuredData} />
       <div className="flex flex-col h-screen overflow-hidden bg-[#0a0a0a]">
+        {/* Mobile Menu Button */}
+        <button
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+          className="md:hidden fixed top-4 left-4 z-50 p-2.5 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-white min-w-[44px] min-h-[44px] flex items-center justify-center"
+          aria-label="Toggle menu"
+        >
+          <motion.div
+            animate={{ rotate: sidebarOpen ? 90 : 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            {sidebarOpen ? (
+              <Sparkles size={20} />
+            ) : (
+              <BarChart3 size={20} />
+            )}
+          </motion.div>
+        </button>
+
         <div className="flex flex-1 overflow-hidden">
           <Sidebar isOpen={sidebarOpen} onToggle={() => setSidebarOpen(!sidebarOpen)} />
           <main className="flex-1 overflow-auto">
             <div className="min-h-full flex flex-col">
               {/* Hero Section */}
-              <section className="relative overflow-hidden px-6 md:px-8 pt-12 pb-8">
+              <section className="relative overflow-hidden px-4 sm:px-6 md:px-8 pt-16 sm:pt-12 pb-6 md:pb-8">
                 {/* Animated background elements */}
                 <div className="absolute inset-0 overflow-hidden">
                   <motion.div
@@ -191,16 +227,16 @@ export default function OverviewPage() {
                     className="text-center mb-12"
                   >
                     <motion.h1
-                      className="text-6xl md:text-7xl font-extrabold mb-6"
+                      className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-extrabold mb-4 md:mb-6"
                       initial={{ opacity: 0, scale: 0.9 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: 0.2, type: "spring", stiffness: 100 }}
                     >
                       <span className="gradient-text block">Classic Models</span>
-                      <span className="text-white block mt-2">Analytics Dashboard</span>
+                      <span className="text-white block mt-1 md:mt-2 text-2xl sm:text-3xl md:text-6xl lg:text-7xl">Analytics Dashboard</span>
                     </motion.h1>
                     <motion.p
-                      className="text-xl md:text-2xl text-gray-300/90 max-w-3xl mx-auto leading-relaxed mb-6"
+                      className="text-sm sm:text-base md:text-xl lg:text-2xl text-gray-300/90 max-w-3xl mx-auto leading-relaxed mb-4 md:mb-6 px-2"
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.4 }}
@@ -215,24 +251,24 @@ export default function OverviewPage() {
                       transition={{ delay: 0.6 }}
                     >
                       <motion.div
-                        className="px-6 py-3 rounded-2xl relative overflow-hidden group"
+                        className="px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl md:rounded-2xl relative overflow-hidden group"
                         style={{
                           background: 'linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.06) 100%)',
                           backdropFilter: 'blur(20px) saturate(180%)',
                           border: '1px solid rgba(255,255,255,0.18)',
                           boxShadow: '0 8px 32px 0 rgba(0,0,0,0.4), inset 0 1px 0 0 rgba(255,255,255,0.25)',
                         }}
-                        whileHover={{ scale: 1.05, y: -2 }}
+                        whileHover={{ scale: window.innerWidth >= 768 ? 1.05 : 1, y: window.innerWidth >= 768 ? -2 : 0 }}
                       >
                         <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity" />
-                        <div className="flex items-center gap-3 relative z-10">
+                        <div className="flex items-center gap-2 sm:gap-3 relative z-10">
                           <motion.div
-                            className="w-12 h-12 rounded-xl overflow-hidden relative"
+                            className="w-8 h-8 sm:w-10 sm:h-12 md:w-12 md:h-12 rounded-lg md:rounded-xl overflow-hidden relative flex-shrink-0"
                             style={{
                               border: '2px solid rgba(255,255,255,0.3)',
                               boxShadow: '0 4px 20px rgba(139, 92, 246, 0.4), inset 0 1px 0 rgba(255,255,255,0.3)',
                             }}
-                            whileHover={{ scale: 1.1, rotate: 3 }}
+                            whileHover={{ scale: !isMobile ? 1.1 : 1, rotate: !isMobile ? 3 : 0 }}
                             transition={{ type: "spring", stiffness: 300, damping: 20 }}
                           >
                             <div className="absolute inset-0 bg-gradient-to-br from-purple-400/20 to-cyan-400/20 z-10" />
@@ -244,8 +280,8 @@ export default function OverviewPage() {
                             <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent z-10" />
                           </motion.div>
                           <div>
-                            <p className="text-xs text-gray-400 mb-0.5">Created by</p>
-                            <p className="text-base font-semibold text-white">Otabek Jurabekov</p>
+                            <p className="text-[10px] sm:text-xs text-gray-400 mb-0.5">Created by</p>
+                            <p className="text-xs sm:text-sm md:text-base font-semibold text-white">Otabek Jurabekov</p>
                           </div>
                         </div>
                       </motion.div>
@@ -254,7 +290,7 @@ export default function OverviewPage() {
 
                   {/* Quick Stats */}
                   <motion.div
-                    className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12"
+                    className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 md:gap-4 mb-6 md:mb-12"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.6 }}
@@ -267,8 +303,8 @@ export default function OverviewPage() {
                           initial={{ opacity: 0, scale: 0.9 }}
                           animate={{ opacity: 1, scale: 1 }}
                           transition={{ delay: 0.7 + index * 0.1 }}
-                          whileHover={{ scale: 1.05, y: -4 }}
-                          className="rounded-2xl p-6 relative overflow-hidden group"
+                          whileHover={{ scale: !isMobile ? 1.05 : 1, y: !isMobile ? -4 : 0 }}
+                          className="rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-6 relative overflow-hidden group"
                           style={{
                             background: 'linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.06) 100%)',
                             backdropFilter: 'blur(24px) saturate(180%)',
@@ -277,9 +313,9 @@ export default function OverviewPage() {
                           }}
                         >
                           <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-20 transition-opacity`} />
-                          <Icon className={`text-white mb-3 relative z-10`} size={28} />
-                          <div className="text-3xl font-bold text-white mb-1 relative z-10">{stat.value}</div>
-                          <div className="text-sm text-gray-300/80 relative z-10">{stat.label}</div>
+                          <Icon className={`text-white mb-1.5 sm:mb-2 md:mb-3 relative z-10`} size={20} className="sm:w-6 sm:h-6 md:w-7 md:h-7" />
+                          <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-white mb-0.5 md:mb-1 relative z-10">{stat.value}</div>
+                          <div className="text-[10px] sm:text-xs md:text-sm text-gray-300/80 relative z-10 leading-tight">{stat.label}</div>
                         </motion.div>
                       )
                     })}
@@ -288,18 +324,18 @@ export default function OverviewPage() {
               </section>
 
               {/* About Section */}
-              <section className="px-6 md:px-8 py-12 relative">
+              <section className="px-4 sm:px-6 md:px-8 py-6 sm:py-8 md:py-12 relative">
                 <div className="max-w-7xl mx-auto">
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="mb-12"
+                    className="mb-6 md:mb-12"
                   >
-                    <h2 className="text-4xl font-bold text-white mb-6 flex items-center gap-3">
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 md:mb-6 flex items-center gap-2 md:gap-3">
                       <span className="gradient-text">About the Project</span>
                     </h2>
-                    <div className="space-y-6 text-lg text-gray-300/90 leading-relaxed">
+                    <div className="space-y-3 sm:space-y-4 md:space-y-6 text-sm sm:text-base md:text-lg text-gray-300/90 leading-relaxed">
                       <p>
                         This comprehensive analytics dashboard represents a deep exploration into the <strong className="text-white">naming conventions, spelling patterns, and textual characteristics</strong> within the Classic Models database. 
                         The project goes far beyond simple data visualization—it's a systematic analysis of how names, words, and text patterns are structured across different entities.
@@ -322,7 +358,7 @@ export default function OverviewPage() {
 
                   {/* Features Grid */}
                   <motion.div
-                    className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12"
+                    className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 md:gap-6 mb-6 md:mb-12"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -337,8 +373,8 @@ export default function OverviewPage() {
                           whileInView={{ opacity: 1, y: 0 }}
                           viewport={{ once: true }}
                           transition={{ delay: 0.3 + index * 0.1 }}
-                          whileHover={{ scale: 1.02, y: -4 }}
-                          className="rounded-2xl p-6 relative overflow-hidden group"
+                          whileHover={{ scale: !isMobile ? 1.02 : 1, y: !isMobile ? -4 : 0 }}
+                          className="rounded-xl md:rounded-2xl p-4 sm:p-5 md:p-6 relative overflow-hidden group"
                           style={{
                             background: 'linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.06) 100%)',
                             backdropFilter: 'blur(24px) saturate(180%)',
@@ -348,13 +384,13 @@ export default function OverviewPage() {
                         >
                           <div className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-0 group-hover:opacity-20 transition-opacity`} />
                           <div className="relative z-10">
-                            <div className="flex items-center gap-3 mb-4">
-                              <div className={`p-3 rounded-xl bg-gradient-to-br ${feature.color} opacity-80`}>
-                                <Icon className="text-white" size={24} />
+                            <div className="flex items-center gap-2 sm:gap-3 mb-3 md:mb-4">
+                              <div className={`p-2 sm:p-2.5 md:p-3 rounded-lg md:rounded-xl bg-gradient-to-br ${feature.color} opacity-80`}>
+                                <Icon className="text-white" size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6" />
                               </div>
-                              <h3 className="text-xl font-bold text-white">{feature.title}</h3>
+                              <h3 className="text-base sm:text-lg md:text-xl font-bold text-white">{feature.title}</h3>
                             </div>
-                            <p className="text-gray-300/90 leading-relaxed">{feature.description}</p>
+                            <p className="text-xs sm:text-sm md:text-base text-gray-300/90 leading-relaxed">{feature.description}</p>
                           </div>
                         </motion.div>
                       )
@@ -364,13 +400,13 @@ export default function OverviewPage() {
               </section>
 
               {/* About Me Section */}
-              <section className="px-6 md:px-8 py-12 relative">
+              <section className="px-4 sm:px-6 md:px-8 py-6 sm:py-8 md:py-12 relative">
                 <div className="max-w-7xl mx-auto">
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="rounded-3xl p-8 md:p-12 relative overflow-hidden"
+                    className="rounded-2xl md:rounded-3xl p-4 sm:p-6 md:p-8 lg:p-12 relative overflow-hidden"
                     style={{
                       background: 'linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.06) 100%)',
                       backdropFilter: 'blur(30px) saturate(180%)',
@@ -440,11 +476,11 @@ export default function OverviewPage() {
                         </motion.div>
 
                         <div className="flex-1">
-                          <div className="flex items-center gap-4 mb-3">
-                            <div className="w-1 h-12 rounded-full bg-gradient-to-b from-purple-400 via-cyan-400 to-pink-400" />
+                          <div className="flex items-center gap-2 sm:gap-3 md:gap-4 mb-3">
+                            <div className="w-1 h-8 sm:h-10 md:h-12 rounded-full bg-gradient-to-b from-purple-400 via-cyan-400 to-pink-400" />
                             <div>
-                              <h2 className="text-4xl font-bold gradient-text mb-2">About the Developer</h2>
-                              <p className="text-gray-300/80 text-lg">Otabek Jurabekov • PDP University (Group 24-303)</p>
+                              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold gradient-text mb-1 md:mb-2">About the Developer</h2>
+                              <p className="text-gray-300/80 text-xs sm:text-sm md:text-base lg:text-lg">Otabek Jurabekov • PDP University (Group 24-303)</p>
                             </div>
                           </div>
                           <motion.div
@@ -470,10 +506,10 @@ export default function OverviewPage() {
                         </div>
                       </motion.div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 mb-4 md:mb-8">
                         {/* Main Bio */}
                         <motion.div
-                          className="space-y-4 text-gray-300/90 leading-relaxed"
+                          className="space-y-2 sm:space-y-3 md:space-y-4 text-xs sm:text-sm md:text-base text-gray-300/90 leading-relaxed"
                           initial={{ opacity: 0, y: 20 }}
                           whileInView={{ opacity: 1, y: 0 }}
                           viewport={{ once: true }}
@@ -503,18 +539,18 @@ export default function OverviewPage() {
 
                         {/* Achievements & Links */}
                         <motion.div
-                          className="space-y-6"
+                          className="space-y-4 sm:space-y-5 md:space-y-6"
                           initial={{ opacity: 0, y: 20 }}
                           whileInView={{ opacity: 1, y: 0 }}
                           viewport={{ once: true }}
                           transition={{ delay: 0.4 }}
                         >
                           <div>
-                            <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                              <Trophy className="text-yellow-400" size={24} />
+                            <h3 className="text-base sm:text-lg md:text-xl font-bold text-white mb-3 md:mb-4 flex items-center gap-2">
+                              <Trophy className="text-yellow-400" size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6" />
                               Key Achievements
                             </h3>
-                            <div className="space-y-3">
+                            <div className="space-y-2 sm:space-y-2.5 md:space-y-3">
                               {achievements.map((achievement, index) => {
                                 const Icon = achievement.icon
                                 return (
@@ -524,14 +560,14 @@ export default function OverviewPage() {
                                     whileInView={{ opacity: 1, x: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: 0.5 + index * 0.1 }}
-                                    className="flex items-center gap-3 p-3 rounded-xl"
+                                    className="flex items-center gap-2 sm:gap-3 p-2 sm:p-2.5 md:p-3 rounded-lg md:rounded-xl min-h-[44px]"
                                     style={{
                                       background: 'rgba(255,255,255,0.05)',
                                       backdropFilter: 'blur(10px)',
                                     }}
                                   >
-                                    <Icon className={achievement.color} size={20} />
-                                    <span className="text-gray-300">{achievement.text}</span>
+                                    <Icon className={achievement.color} size={16} className="sm:w-4 sm:h-4 md:w-5 md:h-5 flex-shrink-0" />
+                                    <span className="text-xs sm:text-sm md:text-base text-gray-300">{achievement.text}</span>
                                   </motion.div>
                                 )
                               })}
@@ -539,11 +575,11 @@ export default function OverviewPage() {
                           </div>
 
                           <div>
-                            <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                              <ExternalLink className="text-cyan-400" size={24} />
+                            <h3 className="text-base sm:text-lg md:text-xl font-bold text-white mb-3 md:mb-4 flex items-center gap-2">
+                              <ExternalLink className="text-cyan-400" size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6" />
                               Connect & Profiles
                             </h3>
-                            <div className="grid grid-cols-2 gap-3">
+                            <div className="grid grid-cols-2 gap-2 sm:gap-2.5 md:gap-3">
                               {socialLinks.map((link, index) => {
                                 const Icon = link.icon
                                 return (
@@ -556,9 +592,9 @@ export default function OverviewPage() {
                                     whileInView={{ opacity: 1, scale: 1 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: 0.6 + index * 0.05 }}
-                                    whileHover={{ scale: 1.05, y: -2 }}
+                                    whileHover={{ scale: !isMobile ? 1.05 : 1, y: !isMobile ? -2 : 0 }}
                                     whileTap={{ scale: 0.95 }}
-                                    className="flex items-center gap-2 p-3 rounded-xl group relative overflow-hidden"
+                                    className="flex items-center gap-1.5 sm:gap-2 p-2 sm:p-2.5 md:p-3 rounded-lg md:rounded-xl group relative overflow-hidden min-h-[44px]"
                                     style={{
                                       background: 'rgba(255,255,255,0.08)',
                                       backdropFilter: 'blur(10px)',
@@ -566,8 +602,8 @@ export default function OverviewPage() {
                                     }}
                                   >
                                     <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity" />
-                                    <Icon className="text-gray-400 group-hover:text-white relative z-10 transition-colors" size={18} aria-hidden="true" />
-                                    <span className="text-sm text-gray-300 group-hover:text-white relative z-10 transition-colors">{link.name}</span>
+                                    <Icon className="text-gray-400 group-hover:text-white relative z-10 transition-colors" size={14} className="sm:w-4 sm:h-4 md:w-[18px] md:h-[18px] flex-shrink-0" aria-hidden="true" />
+                                    <span className="text-[10px] sm:text-xs md:text-sm text-gray-300 group-hover:text-white relative z-10 transition-colors truncate">{link.name}</span>
                                   </motion.a>
                                 )
                               })}
@@ -581,17 +617,17 @@ export default function OverviewPage() {
               </section>
 
               {/* Quick Navigation */}
-              <section className="px-6 md:px-8 py-12">
+              <section className="px-4 sm:px-6 md:px-8 py-6 sm:py-8 md:py-12">
                 <div className="max-w-7xl mx-auto">
                   <motion.h2
-                    className="text-3xl font-bold text-white mb-8 text-center"
+                    className="text-2xl sm:text-2xl md:text-3xl font-bold text-white mb-4 sm:mb-6 md:mb-8 text-center"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                   >
                     <span className="gradient-text">Explore the Dashboard</span>
                   </motion.h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
                     {[
                       { name: 'Dashboard', href: '/dashboard', icon: BarChart3, color: 'from-purple-500 to-cyan-500', desc: 'Overview of all analytics' },
                       { name: 'Customers', href: '/customers', icon: Users, color: 'from-cyan-500 to-blue-500', desc: 'Customer name analysis' },
@@ -608,9 +644,9 @@ export default function OverviewPage() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.1 }}
-                            whileHover={{ scale: 1.05, y: -6 }}
+                            whileHover={{ scale: !isMobile ? 1.05 : 1, y: !isMobile ? -6 : 0 }}
                             whileTap={{ scale: 0.98 }}
-                            className="rounded-2xl p-6 relative overflow-hidden group cursor-pointer"
+                            className="rounded-xl md:rounded-2xl p-4 sm:p-5 md:p-6 relative overflow-hidden group cursor-pointer min-h-[120px] sm:min-h-[140px]"
                             style={{
                               background: 'linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.06) 100%)',
                               backdropFilter: 'blur(24px) saturate(180%)',
@@ -633,14 +669,14 @@ export default function OverviewPage() {
                               }}
                             />
                             <div className="relative z-10">
-                              <div className="flex items-center justify-between mb-4">
-                              <div className={`p-3 rounded-xl bg-gradient-to-br ${item.color} opacity-80`}>
-                                <Icon className="text-white" size={24} aria-hidden="true" />
+                              <div className="flex items-center justify-between mb-2 sm:mb-3 md:mb-4">
+                                <div className={`p-2 sm:p-2.5 md:p-3 rounded-lg md:rounded-xl bg-gradient-to-br ${item.color} opacity-80`}>
+                                  <Icon className="text-white" size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6" aria-hidden="true" />
+                                </div>
+                                <ArrowRight className="text-gray-400 group-hover:text-white group-hover:translate-x-1 transition-all" size={16} className="sm:w-4 sm:h-4 md:w-5 md:h-5" aria-hidden="true" />
                               </div>
-                              <ArrowRight className="text-gray-400 group-hover:text-white group-hover:translate-x-1 transition-all" size={20} aria-hidden="true" />
-                              </div>
-                              <h3 className="text-xl font-bold text-white mb-2">{item.name}</h3>
-                              <p className="text-sm text-gray-300/80">{item.desc}</p>
+                              <h3 className="text-base sm:text-lg md:text-xl font-bold text-white mb-1 md:mb-2">{item.name}</h3>
+                              <p className="text-[10px] sm:text-xs md:text-sm text-gray-300/80 leading-tight">{item.desc}</p>
                             </div>
                           </motion.div>
                         </Link>
