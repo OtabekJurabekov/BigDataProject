@@ -94,9 +94,10 @@ export default function Footer() {
                     <a
                       href={link.href}
                       className="text-sm text-gray-400 hover:text-white transition-colors flex items-center gap-2 group"
+                      aria-label={`Navigate to ${link.name}`}
                     >
                       <span>{link.name}</span>
-                      <ExternalLink size={12} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                      <ExternalLink size={12} className="opacity-0 group-hover:opacity-100 transition-opacity" aria-hidden="true" />
                     </a>
                   </motion.li>
                 ))}
@@ -135,9 +136,10 @@ export default function Footer() {
                         border: '1px solid rgba(255,255,255,0.15)',
                         boxShadow: '0 4px 16px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.1)',
                       }}
+                      aria-label={`Visit ${link.name} profile`}
                     >
                       <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity" />
-                      <Icon size={18} className="text-gray-400 group-hover:text-white relative z-10 transition-colors" />
+                      <Icon size={18} className="text-gray-400 group-hover:text-white relative z-10 transition-colors" aria-hidden="true" />
                     </motion.a>
                   )
                 })}

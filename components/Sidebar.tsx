@@ -100,10 +100,12 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
               background: 'rgba(255,255,255,0.1)',
               backdropFilter: 'blur(10px)',
             }}
+            aria-label={isOpen ? 'Collapse sidebar' : 'Expand sidebar'}
+            aria-expanded={isOpen}
           >
             <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity" />
             <div className="relative z-10">
-              {isOpen ? <ChevronLeft size={20} /> : <ChevronRight size={20} />}
+              {isOpen ? <ChevronLeft size={20} aria-hidden="true" /> : <ChevronRight size={20} aria-hidden="true" />}
             </div>
           </motion.button>
         </div>
@@ -114,7 +116,7 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
             const isActive = pathname === item.href
 
             return (
-              <Link key={item.href} href={item.href}>
+              <Link key={item.href} href={item.href} aria-label={item.label}>
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -178,6 +180,7 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
                       size={20}
                       className={isActive ? 'text-white' : 'text-gray-300 group-hover:text-white'}
                       strokeWidth={isActive ? 2.5 : 2}
+                      aria-hidden="true"
                     />
                   </motion.div>
                   
@@ -261,13 +264,15 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
               className="flex justify-center"
               whileHover={{ scale: 1.1 }}
             >
-              <motion.div
+              <motion.a
+                href="/overview"
                 className="w-10 h-10 rounded-xl overflow-hidden cursor-pointer relative"
                 style={{
                   border: '2px solid rgba(255,255,255,0.3)',
                   boxShadow: '0 4px 16px rgba(139, 92, 246, 0.3), inset 0 1px 0 rgba(255,255,255,0.2)',
                 }}
                 whileHover={{ rotate: 5 }}
+                aria-label="View profile - Otabek Jurabekov"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-purple-400/20 to-cyan-400/20 z-10" />
                 <img
@@ -276,7 +281,7 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
                   className="w-full h-full object-cover relative z-0"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent z-10" />
-              </motion.div>
+              </motion.a>
             </motion.div>
           )}
         </motion.div>

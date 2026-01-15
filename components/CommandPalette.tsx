@@ -131,8 +131,9 @@ export default function CommandPalette({ onClose }: CommandPaletteProps) {
               whileHover={{ scale: 1.1, rotate: 90 }}
               whileTap={{ scale: 0.9 }}
               className="p-2 rounded-lg hover:bg-white/10 transition-colors text-gray-400 hover:text-white"
+              aria-label="Close command palette"
             >
-              <X size={18} />
+              <X size={18} aria-hidden="true" />
             </motion.button>
           </div>
 
@@ -154,22 +155,27 @@ export default function CommandPalette({ onClose }: CommandPaletteProps) {
                       backdropFilter: 'blur(10px)',
                     } : {}}
                     onClick={onClose}
+                    aria-label={cmd.label}
+                    aria-describedby={`command-category-${cmd.id}`}
                   >
                     {index === selectedIndex && (
                       <motion.div
                         className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-purple-400 to-cyan-400"
                         layoutId="commandIndicator"
                         transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                        aria-hidden="true"
                       />
                     )}
                     <div className="flex items-center gap-3">
                       <Sparkles 
                         size={16} 
-                        className={index === selectedIndex ? 'text-purple-300' : 'text-gray-500'} 
+                        className={index === selectedIndex ? 'text-purple-300' : 'text-gray-500'}
+                        aria-hidden="true"
                       />
                       <span className="font-medium">{cmd.label}</span>
                     </div>
                     <span 
+                      id={`command-category-${cmd.id}`}
                       className={`text-xs px-2.5 py-1 rounded-md ${
                         index === selectedIndex 
                           ? 'bg-white/20 text-white' 
@@ -196,10 +202,10 @@ export default function CommandPalette({ onClose }: CommandPaletteProps) {
             <div className="flex gap-4 text-gray-400">
               <div className="flex items-center gap-2">
                 <kbd className="px-2 py-1 rounded bg-white/10 text-white/90 font-mono text-[10px] border border-white/20">
-                  ↑
+                  ?
                 </kbd>
                 <kbd className="px-2 py-1 rounded bg-white/10 text-white/90 font-mono text-[10px] border border-white/20">
-                  ↓
+                  ?
                 </kbd>
                 <span>Navigate</span>
               </div>

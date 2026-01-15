@@ -143,7 +143,7 @@ export default function Dashboard() {
 
       {/* Key Metrics */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <Link href="/customers">
+        <Link href="/customers" aria-label="View customer analytics">
           <MetricCard
             title="Customers"
             value={customerData.length}
@@ -152,7 +152,7 @@ export default function Dashboard() {
             delay={0}
           />
         </Link>
-        <Link href="/products">
+        <Link href="/products" aria-label="View product analytics">
           <MetricCard
             title="Products"
             value={productData.length}
@@ -161,7 +161,7 @@ export default function Dashboard() {
             delay={0.1}
           />
         </Link>
-        <Link href="/offices">
+        <Link href="/offices" aria-label="View office analytics">
           <MetricCard
             title="Offices"
             value={cityData.length}
@@ -170,7 +170,7 @@ export default function Dashboard() {
             delay={0.2}
           />
         </Link>
-        <Link href="/employees">
+        <Link href="/employees" aria-label="View employee analytics">
           <MetricCard
             title="Employees"
             value={employeeData.length}
@@ -188,7 +188,7 @@ export default function Dashboard() {
         transition={{ delay: 0.4 }}
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
       >
-        <Link href="/customers">
+        <Link href="/customers" aria-label="Navigate to customer analytics page">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -228,7 +228,7 @@ export default function Dashboard() {
                   }}
                   whileHover={{ scale: 1.15, rotate: 5 }}
                 >
-                  <Users className="text-white" size={22} strokeWidth={2.5} />
+                  <Users className="text-white" size={22} strokeWidth={2.5} aria-hidden="true" />
                 </motion.div>
                 <span className="text-white font-semibold text-lg">Customers</span>
               </div>
@@ -236,12 +236,12 @@ export default function Dashboard() {
                 animate={{ x: [0, 4, 0] }}
                 transition={{ duration: 1.5, repeat: Infinity }}
               >
-                <ArrowRight className="text-gray-400 group-hover:text-white transition-colors" size={20} />
+                <ArrowRight className="text-gray-400 group-hover:text-white transition-colors" size={20} aria-hidden="true" />
               </motion.div>
             </div>
           </motion.div>
         </Link>
-        <Link href="/products">
+        <Link href="/products" aria-label="Navigate to product analytics page">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -281,7 +281,7 @@ export default function Dashboard() {
                   }}
                   whileHover={{ scale: 1.15, rotate: 5 }}
                 >
-                  <Package className="text-white" size={22} strokeWidth={2.5} />
+                  <Package className="text-white" size={22} strokeWidth={2.5} aria-hidden="true" />
                 </motion.div>
                 <span className="text-white font-semibold text-lg">Products</span>
               </div>
@@ -289,12 +289,12 @@ export default function Dashboard() {
                 animate={{ x: [0, 4, 0] }}
                 transition={{ duration: 1.5, repeat: Infinity, delay: 0.2 }}
               >
-                <ArrowRight className="text-gray-400 group-hover:text-white transition-colors" size={20} />
+                <ArrowRight className="text-gray-400 group-hover:text-white transition-colors" size={20} aria-hidden="true" />
               </motion.div>
             </div>
           </motion.div>
         </Link>
-        <Link href="/offices">
+        <Link href="/offices" aria-label="Navigate to office analytics page">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -334,7 +334,7 @@ export default function Dashboard() {
                   }}
                   whileHover={{ scale: 1.15, rotate: 5 }}
                 >
-                  <Building2 className="text-white" size={22} strokeWidth={2.5} />
+                  <Building2 className="text-white" size={22} strokeWidth={2.5} aria-hidden="true" />
                 </motion.div>
                 <span className="text-white font-semibold text-lg">Offices</span>
               </div>
@@ -342,12 +342,12 @@ export default function Dashboard() {
                 animate={{ x: [0, 4, 0] }}
                 transition={{ duration: 1.5, repeat: Infinity, delay: 0.4 }}
               >
-                <ArrowRight className="text-gray-400 group-hover:text-white transition-colors" size={20} />
+                <ArrowRight className="text-gray-400 group-hover:text-white transition-colors" size={20} aria-hidden="true" />
               </motion.div>
             </div>
           </motion.div>
         </Link>
-        <Link href="/employees">
+        <Link href="/employees" aria-label="Navigate to employee analytics page">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -387,7 +387,7 @@ export default function Dashboard() {
                   }}
                   whileHover={{ scale: 1.15, rotate: 5 }}
                 >
-                  <Users className="text-white" size={22} strokeWidth={2.5} />
+                  <Users className="text-white" size={22} strokeWidth={2.5} aria-hidden="true" />
                 </motion.div>
                 <span className="text-white font-semibold text-lg">Employees</span>
               </div>
@@ -395,7 +395,7 @@ export default function Dashboard() {
                 animate={{ x: [0, 4, 0] }}
                 transition={{ duration: 1.5, repeat: Infinity, delay: 0.6 }}
               >
-                <ArrowRight className="text-gray-400 group-hover:text-white transition-colors" size={20} />
+                <ArrowRight className="text-gray-400 group-hover:text-white transition-colors" size={20} aria-hidden="true" />
               </motion.div>
             </div>
           </motion.div>

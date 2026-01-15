@@ -566,7 +566,7 @@ export default function OverviewPage() {
                                     }}
                                   >
                                     <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity" />
-                                    <Icon className="text-gray-400 group-hover:text-white relative z-10 transition-colors" size={18} />
+                                    <Icon className="text-gray-400 group-hover:text-white relative z-10 transition-colors" size={18} aria-hidden="true" />
                                     <span className="text-sm text-gray-300 group-hover:text-white relative z-10 transition-colors">{link.name}</span>
                                   </motion.a>
                                 )
@@ -602,7 +602,7 @@ export default function OverviewPage() {
                     ].map((item, index) => {
                       const Icon = item.icon
                       return (
-                        <Link key={item.name} href={item.href}>
+                        <Link key={item.name} href={item.href} aria-label={`Navigate to ${item.name} - ${item.desc}`}>
                           <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
@@ -634,10 +634,10 @@ export default function OverviewPage() {
                             />
                             <div className="relative z-10">
                               <div className="flex items-center justify-between mb-4">
-                                <div className={`p-3 rounded-xl bg-gradient-to-br ${item.color} opacity-80`}>
-                                  <Icon className="text-white" size={24} />
-                                </div>
-                                <ArrowRight className="text-gray-400 group-hover:text-white group-hover:translate-x-1 transition-all" size={20} />
+                              <div className={`p-3 rounded-xl bg-gradient-to-br ${item.color} opacity-80`}>
+                                <Icon className="text-white" size={24} aria-hidden="true" />
+                              </div>
+                              <ArrowRight className="text-gray-400 group-hover:text-white group-hover:translate-x-1 transition-all" size={20} aria-hidden="true" />
                               </div>
                               <h3 className="text-xl font-bold text-white mb-2">{item.name}</h3>
                               <p className="text-sm text-gray-300/80">{item.desc}</p>
