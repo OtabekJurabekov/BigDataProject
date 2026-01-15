@@ -372,7 +372,7 @@ export default function OverviewPage() {
                           <div className="relative z-10">
                             <div className="flex items-center gap-2 sm:gap-3 mb-3 md:mb-4">
                               <div className={`p-2 sm:p-2.5 md:p-3 rounded-lg md:rounded-xl bg-gradient-to-br ${feature.color} opacity-80`}>
-                                <Icon className="text-white" size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6" />
+                                <Icon className="text-white sm:w-5 sm:h-5 md:w-6 md:h-6" size={18} />
                               </div>
                               <h3 className="text-base sm:text-lg md:text-xl font-bold text-white">{feature.title}</h3>
                             </div>
@@ -552,7 +552,7 @@ export default function OverviewPage() {
                                       backdropFilter: 'blur(10px)',
                                     }}
                                   >
-                                    <Icon className={achievement.color} size={16} className="sm:w-4 sm:h-4 md:w-5 md:h-5 flex-shrink-0" />
+                                    <Icon className={`${achievement.color} sm:w-4 sm:h-4 md:w-5 md:h-5 flex-shrink-0`} size={16} />
                                     <span className="text-xs sm:text-sm md:text-base text-gray-300">{achievement.text}</span>
                                   </motion.div>
                                 )
@@ -588,7 +588,7 @@ export default function OverviewPage() {
                                     }}
                                   >
                                     <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity" />
-                                    <Icon className="text-gray-400 group-hover:text-white relative z-10 transition-colors" size={14} className="sm:w-4 sm:h-4 md:w-[18px] md:h-[18px] flex-shrink-0" aria-hidden="true" />
+                                    <Icon className="text-gray-400 group-hover:text-white relative z-10 transition-colors sm:w-4 sm:h-4 md:w-[18px] md:h-[18px] flex-shrink-0" size={14} aria-hidden="true" />
                                     <span className="text-[10px] sm:text-xs md:text-sm text-gray-300 group-hover:text-white relative z-10 transition-colors truncate">{link.name}</span>
                                   </motion.a>
                                 )
@@ -657,7 +657,7 @@ export default function OverviewPage() {
                             <div className="relative z-10">
                               <div className="flex items-center justify-between mb-2 sm:mb-3 md:mb-4">
                                 <div className={`p-2 sm:p-2.5 md:p-3 rounded-lg md:rounded-xl bg-gradient-to-br ${item.color} opacity-80`}>
-                                  <Icon className="text-white" size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6" aria-hidden="true" />
+                                  <Icon className="text-white sm:w-5 sm:h-5 md:w-6 md:h-6" size={18} aria-hidden="true" />
                                 </div>
                                 <ArrowRight className="text-gray-400 group-hover:text-white group-hover:translate-x-1 transition-all" size={16} className="sm:w-4 sm:h-4 md:w-5 md:h-5" aria-hidden="true" />
                               </div>
