@@ -160,17 +160,6 @@ export default function OverviewPage() {
       <div className="flex flex-col h-screen overflow-hidden bg-[#0a0a0a]">
         {/* Mobile Menu Button */}
         <MobileMenuButton isOpen={sidebarOpen} onToggle={() => setSidebarOpen(!sidebarOpen)} />
-          <motion.div
-            animate={{ rotate: sidebarOpen ? 90 : 0 }}
-            transition={{ duration: 0.2 }}
-          >
-            {sidebarOpen ? (
-              <Sparkles size={20} />
-            ) : (
-              <BarChart3 size={20} />
-            )}
-          </motion.div>
-        </button>
 
         <div className="flex flex-1 overflow-hidden relative">
           <Sidebar isOpen={sidebarOpen} onToggle={() => setSidebarOpen(!sidebarOpen)} />
