@@ -299,7 +299,7 @@ export default function OverviewPage() {
                           }}
                         >
                           <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-20 transition-opacity`} />
-                          <Icon className={`text-white mb-1.5 sm:mb-2 md:mb-3 relative z-10`} size={20} className="sm:w-6 sm:h-6 md:w-7 md:h-7" />
+                          <Icon className="text-white mb-1.5 sm:mb-2 md:mb-3 relative z-10 sm:w-6 sm:h-6 md:w-7 md:h-7" size={20} />
                           <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-white mb-0.5 md:mb-1 relative z-10">{stat.value}</div>
                           <div className="text-[10px] sm:text-xs md:text-sm text-gray-300/80 relative z-10 leading-tight">{stat.label}</div>
                         </motion.div>
