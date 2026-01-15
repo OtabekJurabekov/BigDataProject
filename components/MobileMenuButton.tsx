@@ -12,7 +12,7 @@ export default function MobileMenuButton({ isOpen, onToggle }: MobileMenuButtonP
   return (
     <button
       onClick={onToggle}
-      className="md:hidden fixed top-4 left-4 z-50 p-2.5 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-white min-w-[44px] min-h-[44px] flex items-center justify-center shadow-lg"
+      className="md:hidden fixed top-4 left-4 z-[80] p-2.5 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-white min-w-[44px] min-h-[44px] flex items-center justify-center shadow-lg"
       aria-label="Toggle menu"
     >
       <motion.div

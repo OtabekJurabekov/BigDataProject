@@ -45,15 +45,17 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
   return (
     <>
       {/* Mobile overlay */}
-      {isOpen && isMobile && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          onClick={onToggle}
-          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden"
-        />
-      )}
+      <AnimatePresence>
+        {isOpen && isMobile && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onToggle}
+            className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[60] md:hidden"
+          />
+        )}
+      </AnimatePresence>
       
       <motion.aside
         initial={false}
@@ -62,17 +64,24 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
           x: isMobile ? (isOpen ? 0 : -280) : 0
         }}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
-        className="relative border-r overflow-hidden md:relative fixed md:static inset-y-0 left-0 z-50 md:z-auto"
+        className={`overflow-hidden ${
+          isMobile 
+            ? 'fixed inset-y-0 left-0 z-[70]' 
+            : 'relative z-auto border-r'
+        }`}
         style={{
           background: 'linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.12) 100%)',
           backdropFilter: 'blur(40px) saturate(200%)',
-          borderColor: 'rgba(255,255,255,0.25)',
-          boxShadow: `
+          borderColor: isMobile && !isOpen ? 'transparent' : 'rgba(255,255,255,0.25)',
+          borderRight: isMobile ? 'none' : '1px solid rgba(255,255,255,0.25)',
+          boxShadow: isMobile && !isOpen ? 'none' : `
             inset -1px 0 0 0 rgba(255,255,255,0.15),
             12px 0 48px 0 rgba(0,0,0,0.5),
             0 0 0 1px rgba(255,255,255,0.1) inset,
             0 0 80px -20px rgba(139, 92, 246, 0.2)
           `,
+          pointerEvents: isMobile && !isOpen ? 'none' : 'auto',
+          visibility: isMobile && !isOpen ? 'hidden' : 'visible',
         }}
       >
       {/* Animated background gradient */}

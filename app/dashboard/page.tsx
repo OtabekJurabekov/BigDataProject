@@ -44,9 +44,9 @@ export default function DashboardPage() {
   return (
     <div className="flex flex-col h-screen overflow-hidden bg-[#0a0a0a]">
       <MobileMenuButton isOpen={sidebarOpen} onToggle={() => setSidebarOpen(!sidebarOpen)} />
-      <div className="flex flex-1 overflow-hidden">
+      <div className="flex flex-1 overflow-hidden relative">
         <Sidebar isOpen={sidebarOpen} onToggle={() => setSidebarOpen(!sidebarOpen)} />
-        <main className="flex-1 overflow-auto">
+        <main className="flex-1 overflow-auto w-full">
           <div className="min-h-full flex flex-col">
             <Dashboard />
             <Footer />

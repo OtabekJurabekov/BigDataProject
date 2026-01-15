@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import Sidebar from '@/components/Sidebar'
 import CommandPalette from '@/components/CommandPalette'
 import Footer from '@/components/Footer'
+import MobileMenuButton from '@/components/MobileMenuButton'
 import StructuredData from '@/components/StructuredData'
 import { 
   Code, 
@@ -158,11 +159,7 @@ export default function OverviewPage() {
       <StructuredData data={structuredData} />
       <div className="flex flex-col h-screen overflow-hidden bg-[#0a0a0a]">
         {/* Mobile Menu Button */}
-        <button
-          onClick={() => setSidebarOpen(!sidebarOpen)}
-          className="md:hidden fixed top-4 left-4 z-50 p-2.5 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-white min-w-[44px] min-h-[44px] flex items-center justify-center"
-          aria-label="Toggle menu"
-        >
+        <MobileMenuButton isOpen={sidebarOpen} onToggle={() => setSidebarOpen(!sidebarOpen)} />
           <motion.div
             animate={{ rotate: sidebarOpen ? 90 : 0 }}
             transition={{ duration: 0.2 }}
@@ -175,9 +172,9 @@ export default function OverviewPage() {
           </motion.div>
         </button>
 
-        <div className="flex flex-1 overflow-hidden">
+        <div className="flex flex-1 overflow-hidden relative">
           <Sidebar isOpen={sidebarOpen} onToggle={() => setSidebarOpen(!sidebarOpen)} />
-          <main className="flex-1 overflow-auto">
+          <main className="flex-1 overflow-auto w-full">
             <div className="min-h-full flex flex-col">
               {/* Hero Section */}
               <section className="relative overflow-hidden px-4 sm:px-6 md:px-8 pt-16 sm:pt-12 pb-6 md:pb-8">
