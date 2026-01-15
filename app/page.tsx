@@ -1,21 +1,18 @@
-'use client'
+import { Metadata } from 'next'
+import { redirect } from 'next/navigation'
 
-import { useEffect } from 'react'
-import { useRouter } from 'next/navigation'
+// Since root redirects to /overview, set canonical to /overview
+export const metadata: Metadata = {
+  alternates: {
+    canonical: 'https://bigdata.ilmora.uz/overview',
+  },
+  robots: {
+    index: false, // Don't index the redirect page
+    follow: true,
+  },
+}
 
+// Server-side redirect to /overview
 export default function Home() {
-  const router = useRouter()
-
-  useEffect(() => {
-    router.replace('/overview')
-  }, [router])
-
-  return (
-    <div className="flex items-center justify-center h-screen bg-[#0a0a0a]">
-      <div className="text-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-500 mx-auto mb-4"></div>
-        <p className="text-gray-400">Loading...</p>
-      </div>
-    </div>
-  )
+  redirect('/overview')
 }
