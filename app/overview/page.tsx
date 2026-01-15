@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import Sidebar from '@/components/Sidebar'
 import CommandPalette from '@/components/CommandPalette'
 import Footer from '@/components/Footer'
+import StructuredData from '@/components/StructuredData'
 import { 
   Code, 
   Trophy, 
@@ -95,480 +96,179 @@ export default function OverviewPage() {
     { name: 'Codeforces', url: 'https://codeforces.com/profile/OtabekJurabekov', icon: Trophy },
   ]
 
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Classic Models Analytics Dashboard',
+    description: 'Comprehensive data analytics platform exploring naming conventions, spelling patterns, and textual characteristics within the Classic Models database.',
+    url: 'https://bigdata.ilmora.uz',
+    applicationCategory: 'DataAnalysisApplication',
+    operatingSystem: 'Web',
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+    },
+    author: {
+      '@type': 'Person',
+      name: 'Otabek Jurabekov',
+      url: 'https://www.linkedin.com/in/otabek-jurabekov-290302225/',
+      sameAs: [
+        'https://www.linkedin.com/in/otabek-jurabekov-290302225/',
+        'https://www.instagram.com/otabek.jurabekov/',
+        'https://leetcode.com/u/OtabekJurabekov/',
+        'https://codeforces.com/profile/OtabekJurabekov',
+      ],
+    },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '5',
+      ratingCount: '1',
+    },
+    featureList: [
+      '30+ SQL analytical queries',
+      '40+ interactive visualizations',
+      '10K+ data points analyzed',
+      '100+ insights generated',
+      'Real-time data updates',
+      'Comprehensive database analysis',
+    ],
+  }
+
   return (
-    <div className="flex flex-col h-screen overflow-hidden bg-[#0a0a0a]">
-      <div className="flex flex-1 overflow-hidden">
-        <Sidebar isOpen={sidebarOpen} onToggle={() => setSidebarOpen(!sidebarOpen)} />
-        <main className="flex-1 overflow-auto">
-          <div className="min-h-full flex flex-col">
-            {/* Hero Section */}
-            <section className="relative overflow-hidden px-6 md:px-8 pt-12 pb-8">
-              {/* Animated background elements */}
-              <div className="absolute inset-0 overflow-hidden">
-                <motion.div
-                  className="absolute top-0 right-0 w-96 h-96 rounded-full opacity-20"
-                  style={{
-                    background: 'radial-gradient(circle, rgba(139,92,246,0.4) 0%, transparent 70%)',
-                    filter: 'blur(80px)',
-                  }}
-                  animate={{
-                    scale: [1, 1.2, 1],
-                    x: [0, 50, 0],
-                    y: [0, -30, 0],
-                  }}
-                  transition={{
-                    duration: 8,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                />
-                <motion.div
-                  className="absolute bottom-0 left-0 w-96 h-96 rounded-full opacity-20"
-                  style={{
-                    background: 'radial-gradient(circle, rgba(6,182,212,0.4) 0%, transparent 70%)',
-                    filter: 'blur(80px)',
-                  }}
-                  animate={{
-                    scale: [1, 1.3, 1],
-                    x: [0, -40, 0],
-                    y: [0, 40, 0],
-                  }}
-                  transition={{
-                    duration: 10,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                />
-              </div>
-
-              <div className="relative z-10 max-w-7xl mx-auto">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6 }}
-                  className="text-center mb-12"
-                >
-                  <motion.h1
-                    className="text-6xl md:text-7xl font-extrabold mb-6"
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.2, type: "spring", stiffness: 100 }}
-                  >
-                    <span className="gradient-text block">Classic Models</span>
-                    <span className="text-white block mt-2">Analytics Dashboard</span>
-                  </motion.h1>
-                  <motion.p
-                    className="text-xl md:text-2xl text-gray-300/90 max-w-3xl mx-auto leading-relaxed mb-6"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4 }}
-                  >
-                    A comprehensive data analytics platform exploring naming conventions, 
-                    spelling patterns, and textual characteristics within the Classic Models database
-                  </motion.p>
+    <>
+      <StructuredData data={structuredData} />
+      <div className="flex flex-col h-screen overflow-hidden bg-[#0a0a0a]">
+        <div className="flex flex-1 overflow-hidden">
+          <Sidebar isOpen={sidebarOpen} onToggle={() => setSidebarOpen(!sidebarOpen)} />
+          <main className="flex-1 overflow-auto">
+            <div className="min-h-full flex flex-col">
+              {/* Hero Section */}
+              <section className="relative overflow-hidden px-6 md:px-8 pt-12 pb-8">
+                {/* Animated background elements */}
+                <div className="absolute inset-0 overflow-hidden">
                   <motion.div
-                    className="flex items-center justify-center gap-3"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.6 }}
-                  >
-                    <motion.div
-                      className="px-6 py-3 rounded-2xl relative overflow-hidden group"
-                      style={{
-                        background: 'linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.06) 100%)',
-                        backdropFilter: 'blur(20px) saturate(180%)',
-                        border: '1px solid rgba(255,255,255,0.18)',
-                        boxShadow: '0 8px 32px 0 rgba(0,0,0,0.4), inset 0 1px 0 0 rgba(255,255,255,0.25)',
-                      }}
-                      whileHover={{ scale: 1.05, y: -2 }}
-                    >
-                      <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity" />
-                      <div className="flex items-center gap-3 relative z-10">
-                        <motion.div
-                          className="w-12 h-12 rounded-xl overflow-hidden relative"
-                          style={{
-                            border: '2px solid rgba(255,255,255,0.3)',
-                            boxShadow: '0 4px 20px rgba(139, 92, 246, 0.4), inset 0 1px 0 rgba(255,255,255,0.3)',
-                          }}
-                          whileHover={{ scale: 1.1, rotate: 3 }}
-                          transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                        >
-                          <div className="absolute inset-0 bg-gradient-to-br from-purple-400/20 to-cyan-400/20 z-10" />
-                          <img
-                            src="/OtabekJurabekov.PNG"
-                            alt="Otabek Jurabekov"
-                            className="w-full h-full object-cover relative z-0"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent z-10" />
-                        </motion.div>
-                        <div>
-                          <p className="text-xs text-gray-400 mb-0.5">Created by</p>
-                          <p className="text-base font-semibold text-white">Otabek Jurabekov</p>
-                        </div>
-                      </div>
-                    </motion.div>
-                  </motion.div>
-                </motion.div>
-
-                {/* Quick Stats */}
-                <motion.div
-                  className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.6 }}
-                >
-                  {stats.map((stat, index) => {
-                    const Icon = stat.icon
-                    return (
-                      <motion.div
-                        key={stat.label}
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.7 + index * 0.1 }}
-                        whileHover={{ scale: 1.05, y: -4 }}
-                        className="rounded-2xl p-6 relative overflow-hidden group"
-                        style={{
-                          background: 'linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.06) 100%)',
-                          backdropFilter: 'blur(24px) saturate(180%)',
-                          border: '1px solid rgba(255,255,255,0.18)',
-                          boxShadow: '0 8px 32px 0 rgba(0,0,0,0.4), inset 0 1px 0 0 rgba(255,255,255,0.25)',
-                        }}
-                      >
-                        <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-20 transition-opacity`} />
-                        <Icon className={`text-white mb-3 relative z-10`} size={28} />
-                        <div className="text-3xl font-bold text-white mb-1 relative z-10">{stat.value}</div>
-                        <div className="text-sm text-gray-300/80 relative z-10">{stat.label}</div>
-                      </motion.div>
-                    )
-                  })}
-                </motion.div>
-              </div>
-            </section>
-
-            {/* About Section */}
-            <section className="px-6 md:px-8 py-12 relative">
-              <div className="max-w-7xl mx-auto">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  className="mb-12"
-                >
-                  <h2 className="text-4xl font-bold text-white mb-6 flex items-center gap-3">
-                    <span className="gradient-text">About the Project</span>
-                  </h2>
-                  <div className="space-y-6 text-lg text-gray-300/90 leading-relaxed">
-                    <p>
-                      This comprehensive analytics dashboard represents a deep exploration into the <strong className="text-white">naming conventions, spelling patterns, and textual characteristics</strong> within the Classic Models database. 
-                      The project goes far beyond simple data visualization—it's a systematic analysis of how names, words, and text patterns are structured across different entities.
-                    </p>
-                    <p>
-                      Through <strong className="text-white">30+ sophisticated SQL queries</strong>, we examine everything from the length distribution of country names to the complexity scores of customer names, 
-                      from the vowel frequency in product names to the capitalization patterns across the database. Each analysis reveals unique insights about how textual data is organized, 
-                      how naming conventions vary by geography and entity type, and how these patterns can inform database design, search optimization, and data quality initiatives.
-                    </p>
-                    <p>
-                      The dashboard features <strong className="text-white">40+ interactive visualizations</strong>, each accompanied by detailed descriptions, the underlying SQL code, and human-readable insights. 
-                      This transparency allows users to understand not just what the data shows, but how the analysis was performed and what it means in practical terms.
-                    </p>
-                    <p>
-                      Built with modern web technologies including <strong className="text-white">Next.js 14, TypeScript, and MySQL</strong>, the entire system is containerized with Docker for easy deployment. 
-                      The glassmorphic design, smooth animations, and responsive layout create an experience that feels both professional and engaging—proving that data analytics can be both powerful and beautiful.
-                    </p>
-                  </div>
-                </motion.div>
-
-                {/* Features Grid */}
-                <motion.div
-                  className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.2 }}
-                >
-                  {features.map((feature, index) => {
-                    const Icon = feature.icon
-                    return (
-                      <motion.div
-                        key={feature.title}
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.3 + index * 0.1 }}
-                        whileHover={{ scale: 1.02, y: -4 }}
-                        className="rounded-2xl p-6 relative overflow-hidden group"
-                        style={{
-                          background: 'linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.06) 100%)',
-                          backdropFilter: 'blur(24px) saturate(180%)',
-                          border: '1px solid rgba(255,255,255,0.18)',
-                          boxShadow: '0 8px 32px 0 rgba(0,0,0,0.4), inset 0 1px 0 0 rgba(255,255,255,0.25)',
-                        }}
-                      >
-                        <div className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-0 group-hover:opacity-20 transition-opacity`} />
-                        <div className="relative z-10">
-                          <div className="flex items-center gap-3 mb-4">
-                            <div className={`p-3 rounded-xl bg-gradient-to-br ${feature.color} opacity-80`}>
-                              <Icon className="text-white" size={24} />
-                            </div>
-                            <h3 className="text-xl font-bold text-white">{feature.title}</h3>
-                          </div>
-                          <p className="text-gray-300/90 leading-relaxed">{feature.description}</p>
-                        </div>
-                      </motion.div>
-                    )
-                  })}
-                </motion.div>
-              </div>
-            </section>
-
-            {/* About Me Section */}
-            <section className="px-6 md:px-8 py-12 relative">
-              <div className="max-w-7xl mx-auto">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  className="rounded-3xl p-8 md:p-12 relative overflow-hidden"
-                  style={{
-                    background: 'linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.06) 100%)',
-                    backdropFilter: 'blur(30px) saturate(180%)',
-                    border: '1px solid rgba(255,255,255,0.2)',
-                    boxShadow: '0 20px 60px 0 rgba(0,0,0,0.5), inset 0 1px 0 0 rgba(255,255,255,0.3)',
-                  }}
-                >
-                  {/* Animated gradient overlay */}
-                  <motion.div
-                    className="absolute inset-0 opacity-30"
+                    className="absolute top-0 right-0 w-96 h-96 rounded-full opacity-20"
                     style={{
-                      background: 'linear-gradient(135deg, rgba(139,92,246,0.2) 0%, rgba(6,182,212,0.2) 50%, rgba(236,72,153,0.2) 100%)',
-                      backgroundSize: '200% 200%',
+                      background: 'radial-gradient(circle, rgba(139,92,246,0.4) 0%, transparent 70%)',
+                      filter: 'blur(80px)',
                     }}
                     animate={{
-                      backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+                      scale: [1, 1.2, 1],
+                      x: [0, 50, 0],
+                      y: [0, -30, 0],
+                    }}
+                    transition={{
+                      duration: 8,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  />
+                  <motion.div
+                    className="absolute bottom-0 left-0 w-96 h-96 rounded-full opacity-20"
+                    style={{
+                      background: 'radial-gradient(circle, rgba(6,182,212,0.4) 0%, transparent 70%)',
+                      filter: 'blur(80px)',
+                    }}
+                    animate={{
+                      scale: [1, 1.3, 1],
+                      x: [0, -40, 0],
+                      y: [0, 40, 0],
                     }}
                     transition={{
                       duration: 10,
                       repeat: Infinity,
-                      ease: "linear"
+                      ease: "easeInOut"
                     }}
                   />
+                </div>
 
-                  <div className="relative z-10">
-                    <motion.div
-                      className="flex flex-col md:flex-row items-start md:items-center gap-6 mb-8"
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
+                <div className="relative z-10 max-w-7xl mx-auto">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                    className="text-center mb-12"
+                  >
+                    <motion.h1
+                      className="text-6xl md:text-7xl font-extrabold mb-6"
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.2, type: "spring", stiffness: 100 }}
                     >
-                      {/* Profile Image */}
+                      <span className="gradient-text block">Classic Models</span>
+                      <span className="text-white block mt-2">Analytics Dashboard</span>
+                    </motion.h1>
+                    <motion.p
+                      className="text-xl md:text-2xl text-gray-300/90 max-w-3xl mx-auto leading-relaxed mb-6"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.4 }}
+                    >
+                      A comprehensive data analytics platform exploring naming conventions, 
+                      spelling patterns, and textual characteristics within the Classic Models database
+                    </motion.p>
+                    <motion.div
+                      className="flex items-center justify-center gap-3"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.6 }}
+                    >
                       <motion.div
-                        className="relative group"
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        whileHover={{ scale: 1.05 }}
-                        transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                        className="px-6 py-3 rounded-2xl relative overflow-hidden group"
+                        style={{
+                          background: 'linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.06) 100%)',
+                          backdropFilter: 'blur(20px) saturate(180%)',
+                          border: '1px solid rgba(255,255,255,0.18)',
+                          boxShadow: '0 8px 32px 0 rgba(0,0,0,0.4), inset 0 1px 0 0 rgba(255,255,255,0.25)',
+                        }}
+                        whileHover={{ scale: 1.05, y: -2 }}
                       >
-                        <div className="absolute inset-0 bg-gradient-to-br from-purple-400 via-cyan-400 to-pink-400 rounded-2xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity" />
-                        <div
-                          className="relative w-32 h-32 md:w-40 md:h-40 rounded-2xl overflow-hidden"
-                          style={{
-                            border: '3px solid rgba(255,255,255,0.3)',
-                            boxShadow: '0 20px 60px rgba(139, 92, 246, 0.4), inset 0 1px 0 rgba(255,255,255,0.3)',
-                          }}
-                        >
-                          <img
-                            src="/OtabekJurabekov.PNG"
-                            alt="Otabek Jurabekov"
-                            className="w-full h-full object-cover"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-                        </div>
-                        <motion.div
-                          className="absolute -bottom-2 -right-2 w-12 h-12 rounded-full bg-gradient-to-br from-purple-400 to-cyan-400 flex items-center justify-center"
-                          style={{
-                            border: '3px solid rgba(10,10,10,0.8)',
-                            boxShadow: '0 8px 24px rgba(139, 92, 246, 0.5)',
-                          }}
-                          whileHover={{ rotate: 360 }}
-                          transition={{ duration: 0.6 }}
-                        >
-                          <Trophy className="text-white" size={20} />
-                        </motion.div>
-                      </motion.div>
-
-                      <div className="flex-1">
-                        <div className="flex items-center gap-4 mb-3">
-                          <div className="w-1 h-12 rounded-full bg-gradient-to-b from-purple-400 via-cyan-400 to-pink-400" />
-                          <div>
-                            <h2 className="text-4xl font-bold gradient-text mb-2">About the Developer</h2>
-                            <p className="text-gray-300/80 text-lg">Otabek Jurabekov • PDP University (Group 24-303)</p>
-                          </div>
-                        </div>
-                        <motion.div
-                          className="flex items-center gap-2 mt-4"
-                          initial={{ opacity: 0 }}
-                          whileInView={{ opacity: 1 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: 0.3 }}
-                        >
-                          <div className="px-4 py-2 rounded-xl"
+                        <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+                        <div className="flex items-center gap-3 relative z-10">
+                          <motion.div
+                            className="w-12 h-12 rounded-xl overflow-hidden relative"
                             style={{
-                              background: 'rgba(255,255,255,0.1)',
-                              backdropFilter: 'blur(10px)',
-                              border: '1px solid rgba(255,255,255,0.15)',
+                              border: '2px solid rgba(255,255,255,0.3)',
+                              boxShadow: '0 4px 20px rgba(139, 92, 246, 0.4), inset 0 1px 0 rgba(255,255,255,0.3)',
                             }}
+                            whileHover={{ scale: 1.1, rotate: 3 }}
+                            transition={{ type: "spring", stiffness: 300, damping: 20 }}
                           >
-                            <p className="text-sm text-gray-300">
-                              <span className="text-gray-400">Created by</span>{' '}
-                              <span className="text-white font-semibold">Otabek Jurabekov</span>
-                            </p>
+                            <div className="absolute inset-0 bg-gradient-to-br from-purple-400/20 to-cyan-400/20 z-10" />
+                            <img
+                              src="/OtabekJurabekov.PNG"
+                              alt="Otabek Jurabekov - Developer"
+                              className="w-full h-full object-cover relative z-0"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent z-10" />
+                          </motion.div>
+                          <div>
+                            <p className="text-xs text-gray-400 mb-0.5">Created by</p>
+                            <p className="text-base font-semibold text-white">Otabek Jurabekov</p>
                           </div>
-                        </motion.div>
-                      </div>
+                        </div>
+                      </motion.div>
                     </motion.div>
+                  </motion.div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                      {/* Main Bio */}
-                      <motion.div
-                        className="space-y-4 text-gray-300/90 leading-relaxed"
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.2 }}
-                      >
-                        <p>
-                          I'm <strong className="text-white">Otabek Jurabekov</strong>, a student at PDP University (Group 24-303) and a professional competitive programmer and mathematician. 
-                          I actively combine strong theoretical foundations with real-world engineering, focusing on building scalable backend systems and solving complex algorithmic problems.
-                        </p>
-                        <p>
-                          I am an <strong className="text-white">IOI 2023 (Hungary) participant</strong>, with extensive experience in international mathematics and informatics Olympiads. 
-                          Over the years, competitive programming shaped my way of thinking — precision, performance, and correctness always come first.
-                        </p>
-                        <p>
-                          Currently, I work as a <strong className="text-white">Back-End Developer at Asaxiy.uz</strong>, where I build and maintain high-load backend services, 
-                          and as a <strong className="text-white">Laravel Back-End Developer at Revolution Group</strong>, contributing to production-grade systems with real users and real constraints.
-                        </p>
-                        <p>
-                          I have solved <strong className="text-white">1400+ algorithmic problems</strong> across platforms and hold an Expert-level competitive programming background, 
-                          with deep experience in algorithms, data structures, and problem-solving under pressure. I'm not just focused on passing tests — I focus on writing clean, 
-                          efficient, and maintainable code.
-                        </p>
-                        <p>
-                          I aim to bridge competitive programming discipline with modern software engineering, building systems that are both mathematically sound and practically robust.
-                        </p>
-                      </motion.div>
-
-                      {/* Achievements & Links */}
-                      <motion.div
-                        className="space-y-6"
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.4 }}
-                      >
-                        <div>
-                          <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                            <Trophy className="text-yellow-400" size={24} />
-                            Key Achievements
-                          </h3>
-                          <div className="space-y-3">
-                            {achievements.map((achievement, index) => {
-                              const Icon = achievement.icon
-                              return (
-                                <motion.div
-                                  key={index}
-                                  initial={{ opacity: 0, x: -10 }}
-                                  whileInView={{ opacity: 1, x: 0 }}
-                                  viewport={{ once: true }}
-                                  transition={{ delay: 0.5 + index * 0.1 }}
-                                  className="flex items-center gap-3 p-3 rounded-xl"
-                                  style={{
-                                    background: 'rgba(255,255,255,0.05)',
-                                    backdropFilter: 'blur(10px)',
-                                  }}
-                                >
-                                  <Icon className={achievement.color} size={20} />
-                                  <span className="text-gray-300">{achievement.text}</span>
-                                </motion.div>
-                              )
-                            })}
-                          </div>
-                        </div>
-
-                        <div>
-                          <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                            <ExternalLink className="text-cyan-400" size={24} />
-                            Connect & Profiles
-                          </h3>
-                          <div className="grid grid-cols-2 gap-3">
-                            {socialLinks.map((link, index) => {
-                              const Icon = link.icon
-                              return (
-                                <motion.a
-                                  key={link.name}
-                                  href={link.url}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  initial={{ opacity: 0, scale: 0.9 }}
-                                  whileInView={{ opacity: 1, scale: 1 }}
-                                  viewport={{ once: true }}
-                                  transition={{ delay: 0.6 + index * 0.05 }}
-                                  whileHover={{ scale: 1.05, y: -2 }}
-                                  whileTap={{ scale: 0.95 }}
-                                  className="flex items-center gap-2 p-3 rounded-xl group relative overflow-hidden"
-                                  style={{
-                                    background: 'rgba(255,255,255,0.08)',
-                                    backdropFilter: 'blur(10px)',
-                                    border: '1px solid rgba(255,255,255,0.1)',
-                                  }}
-                                >
-                                  <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity" />
-                                  <Icon className="text-gray-400 group-hover:text-white relative z-10 transition-colors" size={18} />
-                                  <span className="text-sm text-gray-300 group-hover:text-white relative z-10 transition-colors">{link.name}</span>
-                                </motion.a>
-                              )
-                            })}
-                          </div>
-                        </div>
-                      </motion.div>
-                    </div>
-                  </div>
-                </motion.div>
-              </div>
-            </section>
-
-            {/* Quick Navigation */}
-            <section className="px-6 md:px-8 py-12">
-              <div className="max-w-7xl mx-auto">
-                <motion.h2
-                  className="text-3xl font-bold text-white mb-8 text-center"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                >
-                  <span className="gradient-text">Explore the Dashboard</span>
-                </motion.h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {[
-                    { name: 'Dashboard', href: '/dashboard', icon: BarChart3, color: 'from-purple-500 to-cyan-500', desc: 'Overview of all analytics' },
-                    { name: 'Customers', href: '/customers', icon: Users, color: 'from-cyan-500 to-blue-500', desc: 'Customer name analysis' },
-                    { name: 'Products', href: '/products', icon: Package, color: 'from-purple-500 to-pink-500', desc: 'Product naming patterns' },
-                    { name: 'Offices', href: '/offices', icon: Building2, color: 'from-blue-500 to-cyan-500', desc: 'Office location analysis' },
-                    { name: 'Employees', href: '/employees', icon: FileText, color: 'from-pink-500 to-purple-500', desc: 'Employee name patterns' },
-                    { name: 'Analytics', href: '/analytics', icon: Sparkles, color: 'from-purple-500 to-cyan-500', desc: 'Advanced cross-entity analytics' },
-                  ].map((item, index) => {
-                    const Icon = item.icon
-                    return (
-                      <Link key={item.name} href={item.href}>
+                  {/* Quick Stats */}
+                  <motion.div
+                    className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.6 }}
+                  >
+                    {stats.map((stat, index) => {
+                      const Icon = stat.icon
+                      return (
                         <motion.div
-                          initial={{ opacity: 0, y: 20 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: index * 0.1 }}
-                          whileHover={{ scale: 1.05, y: -6 }}
-                          whileTap={{ scale: 0.98 }}
-                          className="rounded-2xl p-6 relative overflow-hidden group cursor-pointer"
+                          key={stat.label}
+                          initial={{ opacity: 0, scale: 0.9 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: 0.7 + index * 0.1 }}
+                          whileHover={{ scale: 1.05, y: -4 }}
+                          className="rounded-2xl p-6 relative overflow-hidden group"
                           style={{
                             background: 'linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.06) 100%)',
                             backdropFilter: 'blur(24px) saturate(180%)',
@@ -576,44 +276,387 @@ export default function OverviewPage() {
                             boxShadow: '0 8px 32px 0 rgba(0,0,0,0.4), inset 0 1px 0 0 rgba(255,255,255,0.25)',
                           }}
                         >
-                          <motion.div
-                            className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-0 group-hover:opacity-30 transition-opacity`}
-                            style={{
-                              backgroundSize: '200% 200%',
-                            }}
-                            animate={{
-                              backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
-                            }}
-                            transition={{
-                              duration: 3,
-                              repeat: Infinity,
-                              ease: "linear"
-                            }}
-                          />
+                          <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-20 transition-opacity`} />
+                          <Icon className={`text-white mb-3 relative z-10`} size={28} />
+                          <div className="text-3xl font-bold text-white mb-1 relative z-10">{stat.value}</div>
+                          <div className="text-sm text-gray-300/80 relative z-10">{stat.label}</div>
+                        </motion.div>
+                      )
+                    })}
+                  </motion.div>
+                </div>
+              </section>
+
+              {/* About Section */}
+              <section className="px-6 md:px-8 py-12 relative">
+                <div className="max-w-7xl mx-auto">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="mb-12"
+                  >
+                    <h2 className="text-4xl font-bold text-white mb-6 flex items-center gap-3">
+                      <span className="gradient-text">About the Project</span>
+                    </h2>
+                    <div className="space-y-6 text-lg text-gray-300/90 leading-relaxed">
+                      <p>
+                        This comprehensive analytics dashboard represents a deep exploration into the <strong className="text-white">naming conventions, spelling patterns, and textual characteristics</strong> within the Classic Models database. 
+                        The project goes far beyond simple data visualization—it's a systematic analysis of how names, words, and text patterns are structured across different entities.
+                      </p>
+                      <p>
+                        Through <strong className="text-white">30+ sophisticated SQL queries</strong>, we examine everything from the length distribution of country names to the complexity scores of customer names, 
+                        from the vowel frequency in product names to the capitalization patterns across the database. Each analysis reveals unique insights about how textual data is organized, 
+                        how naming conventions vary by geography and entity type, and how these patterns can inform database design, search optimization, and data quality initiatives.
+                      </p>
+                      <p>
+                        The dashboard features <strong className="text-white">40+ interactive visualizations</strong>, each accompanied by detailed descriptions, the underlying SQL code, and human-readable insights. 
+                        This transparency allows users to understand not just what the data shows, but how the analysis was performed and what it means in practical terms.
+                      </p>
+                      <p>
+                        Built with modern web technologies including <strong className="text-white">Next.js 14, TypeScript, and MySQL</strong>, the entire system is containerized with Docker for easy deployment. 
+                        The glassmorphic design, smooth animations, and responsive layout create an experience that feels both professional and engaging—proving that data analytics can be both powerful and beautiful.
+                      </p>
+                    </div>
+                  </motion.div>
+
+                  {/* Features Grid */}
+                  <motion.div
+                    className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.2 }}
+                  >
+                    {features.map((feature, index) => {
+                      const Icon = feature.icon
+                      return (
+                        <motion.div
+                          key={feature.title}
+                          initial={{ opacity: 0, y: 20 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: 0.3 + index * 0.1 }}
+                          whileHover={{ scale: 1.02, y: -4 }}
+                          className="rounded-2xl p-6 relative overflow-hidden group"
+                          style={{
+                            background: 'linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.06) 100%)',
+                            backdropFilter: 'blur(24px) saturate(180%)',
+                            border: '1px solid rgba(255,255,255,0.18)',
+                            boxShadow: '0 8px 32px 0 rgba(0,0,0,0.4), inset 0 1px 0 0 rgba(255,255,255,0.25)',
+                          }}
+                        >
+                          <div className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-0 group-hover:opacity-20 transition-opacity`} />
                           <div className="relative z-10">
-                            <div className="flex items-center justify-between mb-4">
-                              <div className={`p-3 rounded-xl bg-gradient-to-br ${item.color} opacity-80`}>
+                            <div className="flex items-center gap-3 mb-4">
+                              <div className={`p-3 rounded-xl bg-gradient-to-br ${feature.color} opacity-80`}>
                                 <Icon className="text-white" size={24} />
                               </div>
-                              <ArrowRight className="text-gray-400 group-hover:text-white group-hover:translate-x-1 transition-all" size={20} />
+                              <h3 className="text-xl font-bold text-white">{feature.title}</h3>
                             </div>
-                            <h3 className="text-xl font-bold text-white mb-2">{item.name}</h3>
-                            <p className="text-sm text-gray-300/80">{item.desc}</p>
+                            <p className="text-gray-300/90 leading-relaxed">{feature.description}</p>
                           </div>
                         </motion.div>
-                      </Link>
-                    )
-                  })}
+                      )
+                    })}
+                  </motion.div>
                 </div>
-              </div>
-            </section>
-          </div>
-          <Footer />
-        </main>
+              </section>
+
+              {/* About Me Section */}
+              <section className="px-6 md:px-8 py-12 relative">
+                <div className="max-w-7xl mx-auto">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="rounded-3xl p-8 md:p-12 relative overflow-hidden"
+                    style={{
+                      background: 'linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.06) 100%)',
+                      backdropFilter: 'blur(30px) saturate(180%)',
+                      border: '1px solid rgba(255,255,255,0.2)',
+                      boxShadow: '0 20px 60px 0 rgba(0,0,0,0.5), inset 0 1px 0 0 rgba(255,255,255,0.3)',
+                    }}
+                  >
+                    {/* Animated gradient overlay */}
+                    <motion.div
+                      className="absolute inset-0 opacity-30"
+                      style={{
+                        background: 'linear-gradient(135deg, rgba(139,92,246,0.2) 0%, rgba(6,182,212,0.2) 50%, rgba(236,72,153,0.2) 100%)',
+                        backgroundSize: '200% 200%',
+                      }}
+                      animate={{
+                        backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+                      }}
+                      transition={{
+                        duration: 10,
+                        repeat: Infinity,
+                        ease: "linear"
+                      }}
+                    />
+
+                    <div className="relative z-10">
+                      <motion.div
+                        className="flex flex-col md:flex-row items-start md:items-center gap-6 mb-8"
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                      >
+                        {/* Profile Image */}
+                        <motion.div
+                          className="relative group"
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
+                          viewport={{ once: true }}
+                          whileHover={{ scale: 1.05 }}
+                          transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                        >
+                          <div className="absolute inset-0 bg-gradient-to-br from-purple-400 via-cyan-400 to-pink-400 rounded-2xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity" />
+                          <div
+                            className="relative w-32 h-32 md:w-40 md:h-40 rounded-2xl overflow-hidden"
+                            style={{
+                              border: '3px solid rgba(255,255,255,0.3)',
+                              boxShadow: '0 20px 60px rgba(139, 92, 246, 0.4), inset 0 1px 0 rgba(255,255,255,0.3)',
+                            }}
+                          >
+                            <img
+                              src="/OtabekJurabekov.PNG"
+                              alt="Otabek Jurabekov - Professional Profile"
+                              className="w-full h-full object-cover"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                          </div>
+                          <motion.div
+                            className="absolute -bottom-2 -right-2 w-12 h-12 rounded-full bg-gradient-to-br from-purple-400 to-cyan-400 flex items-center justify-center"
+                            style={{
+                              border: '3px solid rgba(10,10,10,0.8)',
+                              boxShadow: '0 8px 24px rgba(139, 92, 246, 0.5)',
+                            }}
+                            whileHover={{ rotate: 360 }}
+                            transition={{ duration: 0.6 }}
+                          >
+                            <Trophy className="text-white" size={20} />
+                          </motion.div>
+                        </motion.div>
+
+                        <div className="flex-1">
+                          <div className="flex items-center gap-4 mb-3">
+                            <div className="w-1 h-12 rounded-full bg-gradient-to-b from-purple-400 via-cyan-400 to-pink-400" />
+                            <div>
+                              <h2 className="text-4xl font-bold gradient-text mb-2">About the Developer</h2>
+                              <p className="text-gray-300/80 text-lg">Otabek Jurabekov • PDP University (Group 24-303)</p>
+                            </div>
+                          </div>
+                          <motion.div
+                            className="flex items-center gap-2 mt-4"
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.3 }}
+                          >
+                            <div className="px-4 py-2 rounded-xl"
+                              style={{
+                                background: 'rgba(255,255,255,0.1)',
+                                backdropFilter: 'blur(10px)',
+                                border: '1px solid rgba(255,255,255,0.15)',
+                              }}
+                            >
+                              <p className="text-sm text-gray-300">
+                                <span className="text-gray-400">Created by</span>{' '}
+                                <span className="text-white font-semibold">Otabek Jurabekov</span>
+                              </p>
+                            </div>
+                          </motion.div>
+                        </div>
+                      </motion.div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                        {/* Main Bio */}
+                        <motion.div
+                          className="space-y-4 text-gray-300/90 leading-relaxed"
+                          initial={{ opacity: 0, y: 20 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: 0.2 }}
+                        >
+                          <p>
+                            I'm <strong className="text-white">Otabek Jurabekov</strong>, a student at PDP University (Group 24-303) and a professional competitive programmer and mathematician. 
+                            I actively combine strong theoretical foundations with real-world engineering, focusing on building scalable backend systems and solving complex algorithmic problems.
+                          </p>
+                          <p>
+                            I am an <strong className="text-white">IOI 2023 (Hungary) participant</strong>, with extensive experience in international mathematics and informatics Olympiads. 
+                            Over the years, competitive programming shaped my way of thinking — precision, performance, and correctness always come first.
+                          </p>
+                          <p>
+                            Currently, I work as a <strong className="text-white">Back-End Developer at Asaxiy.uz</strong>, where I build and maintain high-load backend services, 
+                            and as a <strong className="text-white">Laravel Back-End Developer at Revolution Group</strong>, contributing to production-grade systems with real users and real constraints.
+                          </p>
+                          <p>
+                            I have solved <strong className="text-white">1400+ algorithmic problems</strong> across platforms and hold an Expert-level competitive programming background, 
+                            with deep experience in algorithms, data structures, and problem-solving under pressure. I'm not just focused on passing tests — I focus on writing clean, 
+                            efficient, and maintainable code.
+                          </p>
+                          <p>
+                            I aim to bridge competitive programming discipline with modern software engineering, building systems that are both mathematically sound and practically robust.
+                          </p>
+                        </motion.div>
+
+                        {/* Achievements & Links */}
+                        <motion.div
+                          className="space-y-6"
+                          initial={{ opacity: 0, y: 20 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: 0.4 }}
+                        >
+                          <div>
+                            <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                              <Trophy className="text-yellow-400" size={24} />
+                              Key Achievements
+                            </h3>
+                            <div className="space-y-3">
+                              {achievements.map((achievement, index) => {
+                                const Icon = achievement.icon
+                                return (
+                                  <motion.div
+                                    key={index}
+                                    initial={{ opacity: 0, x: -10 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: 0.5 + index * 0.1 }}
+                                    className="flex items-center gap-3 p-3 rounded-xl"
+                                    style={{
+                                      background: 'rgba(255,255,255,0.05)',
+                                      backdropFilter: 'blur(10px)',
+                                    }}
+                                  >
+                                    <Icon className={achievement.color} size={20} />
+                                    <span className="text-gray-300">{achievement.text}</span>
+                                  </motion.div>
+                                )
+                              })}
+                            </div>
+                          </div>
+
+                          <div>
+                            <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                              <ExternalLink className="text-cyan-400" size={24} />
+                              Connect & Profiles
+                            </h3>
+                            <div className="grid grid-cols-2 gap-3">
+                              {socialLinks.map((link, index) => {
+                                const Icon = link.icon
+                                return (
+                                  <motion.a
+                                    key={link.name}
+                                    href={link.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    initial={{ opacity: 0, scale: 0.9 }}
+                                    whileInView={{ opacity: 1, scale: 1 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: 0.6 + index * 0.05 }}
+                                    whileHover={{ scale: 1.05, y: -2 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    className="flex items-center gap-2 p-3 rounded-xl group relative overflow-hidden"
+                                    style={{
+                                      background: 'rgba(255,255,255,0.08)',
+                                      backdropFilter: 'blur(10px)',
+                                      border: '1px solid rgba(255,255,255,0.1)',
+                                    }}
+                                  >
+                                    <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+                                    <Icon className="text-gray-400 group-hover:text-white relative z-10 transition-colors" size={18} />
+                                    <span className="text-sm text-gray-300 group-hover:text-white relative z-10 transition-colors">{link.name}</span>
+                                  </motion.a>
+                                )
+                              })}
+                            </div>
+                          </div>
+                        </motion.div>
+                      </div>
+                    </div>
+                  </motion.div>
+                </div>
+              </section>
+
+              {/* Quick Navigation */}
+              <section className="px-6 md:px-8 py-12">
+                <div className="max-w-7xl mx-auto">
+                  <motion.h2
+                    className="text-3xl font-bold text-white mb-8 text-center"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                  >
+                    <span className="gradient-text">Explore the Dashboard</span>
+                  </motion.h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {[
+                      { name: 'Dashboard', href: '/dashboard', icon: BarChart3, color: 'from-purple-500 to-cyan-500', desc: 'Overview of all analytics' },
+                      { name: 'Customers', href: '/customers', icon: Users, color: 'from-cyan-500 to-blue-500', desc: 'Customer name analysis' },
+                      { name: 'Products', href: '/products', icon: Package, color: 'from-purple-500 to-pink-500', desc: 'Product naming patterns' },
+                      { name: 'Offices', href: '/offices', icon: Building2, color: 'from-blue-500 to-cyan-500', desc: 'Office location analysis' },
+                      { name: 'Employees', href: '/employees', icon: FileText, color: 'from-pink-500 to-purple-500', desc: 'Employee name patterns' },
+                      { name: 'Analytics', href: '/analytics', icon: Sparkles, color: 'from-purple-500 to-cyan-500', desc: 'Advanced cross-entity analytics' },
+                    ].map((item, index) => {
+                      const Icon = item.icon
+                      return (
+                        <Link key={item.name} href={item.href}>
+                          <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: index * 0.1 }}
+                            whileHover={{ scale: 1.05, y: -6 }}
+                            whileTap={{ scale: 0.98 }}
+                            className="rounded-2xl p-6 relative overflow-hidden group cursor-pointer"
+                            style={{
+                              background: 'linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.06) 100%)',
+                              backdropFilter: 'blur(24px) saturate(180%)',
+                              border: '1px solid rgba(255,255,255,0.18)',
+                              boxShadow: '0 8px 32px 0 rgba(0,0,0,0.4), inset 0 1px 0 0 rgba(255,255,255,0.25)',
+                            }}
+                          >
+                            <motion.div
+                              className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-0 group-hover:opacity-30 transition-opacity`}
+                              style={{
+                                backgroundSize: '200% 200%',
+                              }}
+                              animate={{
+                                backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+                              }}
+                              transition={{
+                                duration: 3,
+                                repeat: Infinity,
+                                ease: "linear"
+                              }}
+                            />
+                            <div className="relative z-10">
+                              <div className="flex items-center justify-between mb-4">
+                                <div className={`p-3 rounded-xl bg-gradient-to-br ${item.color} opacity-80`}>
+                                  <Icon className="text-white" size={24} />
+                                </div>
+                                <ArrowRight className="text-gray-400 group-hover:text-white group-hover:translate-x-1 transition-all" size={20} />
+                              </div>
+                              <h3 className="text-xl font-bold text-white mb-2">{item.name}</h3>
+                              <p className="text-sm text-gray-300/80">{item.desc}</p>
+                            </div>
+                          </motion.div>
+                        </Link>
+                      )
+                    })}
+                  </div>
+                </div>
+              </section>
+            </div>
+            <Footer />
+          </main>
+        </div>
+        {commandPaletteOpen && (
+          <CommandPalette onClose={() => setCommandPaletteOpen(false)} />
+        )}
       </div>
-      {commandPaletteOpen && (
-        <CommandPalette onClose={() => setCommandPaletteOpen(false)} />
-      )}
-    </div>
+    </>
   )
 }
