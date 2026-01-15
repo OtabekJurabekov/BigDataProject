@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: bigdata_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: classicmodels
+      MYSQL_USER: classicuser
+      MYSQL_PASSWORD: classicpass
+    ports:
+      - "3307:3306"  # Use 3307 on host to avoid conflict with lexicon MySQL
+    volumes:
+      - bigdata_mysql_data:/var/lib/mysql
+      - ./NeededResourcesToUse/classicmodels.sql:/docker-entrypoint-initdb.d/classicmodels.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-prootpassword"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - bigdata-network
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bigdata_dashboard
+    restart: unless-stopped
+    ports:
+      - "3001:3000"  # Use 3001 on host to avoid conflict with lexicon frontend
+    environment:
+      - DATABASE_HOST=mysql
+      - DATABASE_PORT=3306
+      - DATABASE_USER=classicuser
+      - DATABASE_PASSWORD=classicpass
+      - DATABASE_NAME=classicmodels
+      - NODE_ENV=production
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - bigdata-network
+
+volumes:
+  bigdata_mysql_data:
+
+networks:
+  bigdata-network:
+    driver: bridge
