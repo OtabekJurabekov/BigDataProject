@@ -533,7 +533,7 @@ export default function OverviewPage() {
                         >
                           <div>
                             <h3 className="text-base sm:text-lg md:text-xl font-bold text-white mb-3 md:mb-4 flex items-center gap-2">
-                              <Trophy className="text-yellow-400" size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6" />
+                              <Trophy className="text-yellow-400 sm:w-5 sm:h-5 md:w-6 md:h-6" size={18} />
                               Key Achievements
                             </h3>
                             <div className="space-y-2 sm:space-y-2.5 md:space-y-3">
@@ -562,7 +562,7 @@ export default function OverviewPage() {
 
                           <div>
                             <h3 className="text-base sm:text-lg md:text-xl font-bold text-white mb-3 md:mb-4 flex items-center gap-2">
-                              <ExternalLink className="text-cyan-400" size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6" />
+                              <ExternalLink className="text-cyan-400 sm:w-5 sm:h-5 md:w-6 md:h-6" size={18} />
                               Connect & Profiles
                             </h3>
                             <div className="grid grid-cols-2 gap-2 sm:gap-2.5 md:gap-3">
@@ -659,7 +659,7 @@ export default function OverviewPage() {
                                 <div className={`p-2 sm:p-2.5 md:p-3 rounded-lg md:rounded-xl bg-gradient-to-br ${item.color} opacity-80`}>
                                   <Icon className="text-white sm:w-5 sm:h-5 md:w-6 md:h-6" size={18} aria-hidden="true" />
                                 </div>
-                                <ArrowRight className="text-gray-400 group-hover:text-white group-hover:translate-x-1 transition-all" size={16} className="sm:w-4 sm:h-4 md:w-5 md:h-5" aria-hidden="true" />
+                                <ArrowRight className="text-gray-400 group-hover:text-white group-hover:translate-x-1 transition-all sm:w-4 sm:h-4 md:w-5 md:h-5" size={16} aria-hidden="true" />
                               </div>
                               <h3 className="text-base sm:text-lg md:text-xl font-bold text-white mb-1 md:mb-2">{item.name}</h3>
                               <p className="text-[10px] sm:text-xs md:text-sm text-gray-300/80 leading-tight">{item.desc}</p>
