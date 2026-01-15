@@ -1,10 +1,19 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { useState, useEffect } from 'react'
 import { Github, Linkedin, Instagram, ExternalLink, Mail, Code, Trophy, Briefcase } from 'lucide-react'
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   const links = {
     social: [
@@ -127,7 +136,7 @@ export default function Footer() {
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
                       transition={{ delay: index * 0.05 }}
-                      whileHover={{ scale: window.innerWidth >= 768 ? 1.1 : 1, y: window.innerWidth >= 768 ? -2 : 0 }}
+                      whileHover={{ scale: !isMobile ? 1.1 : 1, y: !isMobile ? -2 : 0 }}
                       whileTap={{ scale: 0.95 }}
                       className="p-2 sm:p-2.5 rounded-lg md:rounded-xl transition-all group relative overflow-hidden min-w-[44px] min-h-[44px] flex items-center justify-center"
                       style={{
