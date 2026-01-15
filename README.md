@@ -108,7 +108,7 @@ Built with modern web technologies including **Next.js 14, TypeScript, and MySQL
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/YOUR_USERNAME/BigDataProject.git
+   git clone https://github.com/OtabekJurabekov/BigDataProject.git
    cd BigDataProject
    ```
 
@@ -316,7 +316,7 @@ This project is created for **educational purposes** as part of a Data Analytics
 
 ## 🤝 Contributing
 
-Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/YOUR_USERNAME/BigDataProject/issues).
+Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/OtabekJurabekov/BigDataProject/issues).
 
 ---
 
