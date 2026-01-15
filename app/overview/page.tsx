@@ -38,15 +38,19 @@ export default function OverviewPage() {
   useEffect(() => {
     // Set sidebar open by default on desktop, closed on mobile
     const checkMobile = () => {
-      const mobile = window.innerWidth < 768
-      setIsMobile(mobile)
-      if (!mobile) {
-        setSidebarOpen(true)
+      if (typeof window !== 'undefined') {
+        const mobile = window.innerWidth < 768
+        setIsMobile(mobile)
+        if (!mobile) {
+          setSidebarOpen(true)
+        }
       }
     }
     checkMobile()
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', checkMobile)
+      return () => window.removeEventListener('resize', checkMobile)
+    }
   }, [])
 
   useEffect(() => {
@@ -57,7 +61,7 @@ export default function OverviewPage() {
       }
       if (e.key === 'Escape') {
         setCommandPaletteOpen(false)
-        if (window.innerWidth < 768) {
+        if (isMobile) {
           setSidebarOpen(false)
         }
       }
@@ -244,7 +248,7 @@ export default function OverviewPage() {
                           border: '1px solid rgba(255,255,255,0.18)',
                           boxShadow: '0 8px 32px 0 rgba(0,0,0,0.4), inset 0 1px 0 0 rgba(255,255,255,0.25)',
                         }}
-                        whileHover={{ scale: window.innerWidth >= 768 ? 1.05 : 1, y: window.innerWidth >= 768 ? -2 : 0 }}
+                        whileHover={{ scale: !isMobile ? 1.05 : 1, y: !isMobile ? -2 : 0 }}
                       >
                         <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity" />
                         <div className="flex items-center gap-2 sm:gap-3 relative z-10">
