@@ -163,7 +163,7 @@ export default function OverviewPage() {
 
         <div className="flex flex-1 overflow-hidden relative">
           <Sidebar isOpen={sidebarOpen} onToggle={() => setSidebarOpen(!sidebarOpen)} />
-          <main className="flex-1 overflow-auto w-full">
+          <main className={`flex-1 overflow-auto ${isMobile ? 'w-full' : ''}`}>
             <div className="min-h-full flex flex-col">
               {/* Hero Section */}
               <section className="relative overflow-hidden px-4 sm:px-6 md:px-8 pt-16 sm:pt-12 pb-6 md:pb-8">

@@ -34,6 +34,14 @@ body {
   scroll-behavior: smooth;
 }
 
+/* Ensure main content is full width on mobile when sidebar is closed */
+@media (max-width: 767px) {
+  main {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+
 body {
   background: 
     radial-gradient(circle at 20% 30%, rgba(139, 92, 246, 0.2) 0%, transparent 50%),

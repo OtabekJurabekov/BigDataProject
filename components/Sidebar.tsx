@@ -82,6 +82,7 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
           `,
           pointerEvents: isMobile && !isOpen ? 'none' : 'auto',
           visibility: isMobile && !isOpen ? 'hidden' : 'visible',
+          display: isMobile && !isOpen ? 'none' : 'block',
         }}
       >
       {/* Animated background gradient */}
