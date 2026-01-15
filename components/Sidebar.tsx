@@ -139,7 +139,7 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
           >
             <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity" />
             <div className="relative z-10">
-              {isOpen ? <ChevronLeft size={20} aria-hidden="true" className="md:w-5 md:h-5" /> : <ChevronRight size={20} aria-hidden="true" className="md:w-5 md:h-5" />}
+              {isOpen ? <ChevronLeft className="md:w-5 md:h-5" size={20} aria-hidden="true" /> : <ChevronRight className="md:w-5 md:h-5" size={20} aria-hidden="true" />}
             </div>
           </motion.button>
         </div>

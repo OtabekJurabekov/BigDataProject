@@ -236,7 +236,7 @@ export default function Dashboard() {
                   }}
                   whileHover={{ scale: !isMobile ? 1.15 : 1, rotate: !isMobile ? 5 : 0 }}
                 >
-                  <Users className="text-white" size={18} className="sm:w-5 sm:h-5 md:w-[22px] md:h-[22px]" strokeWidth={2.5} aria-hidden="true" />
+                  <Users className="text-white sm:w-5 sm:h-5 md:w-[22px] md:h-[22px]" size={18} strokeWidth={2.5} aria-hidden="true" />
                 </motion.div>
                 <span className="text-white font-semibold text-sm sm:text-base md:text-lg">Customers</span>
               </div>
@@ -245,7 +245,7 @@ export default function Dashboard() {
                 transition={{ duration: 1.5, repeat: Infinity }}
                 className="hidden sm:block"
               >
-                <ArrowRight className="text-gray-400 group-hover:text-white transition-colors" size={18} className="md:w-5 md:h-5" aria-hidden="true" />
+                <ArrowRight className="text-gray-400 group-hover:text-white transition-colors md:w-5 md:h-5" size={18} aria-hidden="true" />
               </motion.div>
             </div>
           </motion.div>
@@ -290,7 +290,7 @@ export default function Dashboard() {
                   }}
                   whileHover={{ scale: !isMobile ? 1.15 : 1, rotate: !isMobile ? 5 : 0 }}
                 >
-                  <Package className="text-white" size={18} className="sm:w-5 sm:h-5 md:w-[22px] md:h-[22px]" strokeWidth={2.5} aria-hidden="true" />
+                  <Package className="text-white sm:w-5 sm:h-5 md:w-[22px] md:h-[22px]" size={18} strokeWidth={2.5} aria-hidden="true" />
                 </motion.div>
                 <span className="text-white font-semibold text-sm sm:text-base md:text-lg">Products</span>
               </div>
@@ -299,7 +299,7 @@ export default function Dashboard() {
                 transition={{ duration: 1.5, repeat: Infinity, delay: 0.2 }}
                 className="hidden sm:block"
               >
-                <ArrowRight className="text-gray-400 group-hover:text-white transition-colors" size={18} className="md:w-5 md:h-5" aria-hidden="true" />
+                <ArrowRight className="text-gray-400 group-hover:text-white transition-colors md:w-5 md:h-5" size={18} aria-hidden="true" />
               </motion.div>
             </div>
           </motion.div>
@@ -344,7 +344,7 @@ export default function Dashboard() {
                   }}
                   whileHover={{ scale: !isMobile ? 1.15 : 1, rotate: !isMobile ? 5 : 0 }}
                 >
-                  <Building2 className="text-white" size={18} className="sm:w-5 sm:h-5 md:w-[22px] md:h-[22px]" strokeWidth={2.5} aria-hidden="true" />
+                  <Building2 className="text-white sm:w-5 sm:h-5 md:w-[22px] md:h-[22px]" size={18} strokeWidth={2.5} aria-hidden="true" />
                 </motion.div>
                 <span className="text-white font-semibold text-sm sm:text-base md:text-lg">Offices</span>
               </div>
@@ -353,7 +353,7 @@ export default function Dashboard() {
                 transition={{ duration: 1.5, repeat: Infinity, delay: 0.4 }}
                 className="hidden sm:block"
               >
-                <ArrowRight className="text-gray-400 group-hover:text-white transition-colors" size={18} className="md:w-5 md:h-5" aria-hidden="true" />
+                <ArrowRight className="text-gray-400 group-hover:text-white transition-colors md:w-5 md:h-5" size={18} aria-hidden="true" />
               </motion.div>
             </div>
           </motion.div>
@@ -398,7 +398,7 @@ export default function Dashboard() {
                   }}
                   whileHover={{ scale: !isMobile ? 1.15 : 1, rotate: !isMobile ? 5 : 0 }}
                 >
-                  <Users className="text-white" size={18} className="sm:w-5 sm:h-5 md:w-[22px] md:h-[22px]" strokeWidth={2.5} aria-hidden="true" />
+                  <Users className="text-white sm:w-5 sm:h-5 md:w-[22px] md:h-[22px]" size={18} strokeWidth={2.5} aria-hidden="true" />
                 </motion.div>
                 <span className="text-white font-semibold text-sm sm:text-base md:text-lg">Employees</span>
               </div>
@@ -407,7 +407,7 @@ export default function Dashboard() {
                 transition={{ duration: 1.5, repeat: Infinity, delay: 0.6 }}
                 className="hidden sm:block"
               >
-                <ArrowRight className="text-gray-400 group-hover:text-white transition-colors" size={18} className="md:w-5 md:h-5" aria-hidden="true" />
+                <ArrowRight className="text-gray-400 group-hover:text-white transition-colors md:w-5 md:h-5" size={18} aria-hidden="true" />
               </motion.div>
             </div>
           </motion.div>
@@ -417,7 +417,7 @@ export default function Dashboard() {
       {/* Charts Grid */}
       <div className="space-y-4 sm:space-y-5 md:space-y-6">
         <h2 className="text-xl sm:text-2xl font-bold text-white flex items-center gap-2">
-          <Sparkles className="text-purple-400" size={20} className="sm:w-5 sm:h-5 md:w-6 md:h-6" />
+          <Sparkles className="text-purple-400 sm:w-5 sm:h-5 md:w-6 md:h-6" size={20} />
           Key Visualizations
         </h2>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

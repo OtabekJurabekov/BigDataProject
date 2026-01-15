@@ -118,7 +118,7 @@ export default function MetricCard({
             }}
           >
             <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-            <Icon className="text-white relative z-10" size={18} className="sm:w-5 sm:h-5 md:w-[22px] md:h-[22px]" strokeWidth={2.5} />
+            <Icon className="text-white relative z-10 sm:w-5 sm:h-5 md:w-[22px] md:h-[22px]" size={18} strokeWidth={2.5} />
           </motion.div>
           {trend && (
             <motion.span 
