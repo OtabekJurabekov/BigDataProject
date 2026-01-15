@@ -4,6 +4,10 @@ import './globals.css'
 export const metadata: Metadata = {
   title: 'Classic Models Analytics Dashboard',
   description: 'Comprehensive analysis of naming conventions and textual patterns in Classic Models database',
+  icons: {
+    icon: '/favicon.png',
+    apple: '/favicon.png',
+  },
 }
 
 export default function RootLayout({
