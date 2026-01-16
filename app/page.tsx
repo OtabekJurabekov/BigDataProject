@@ -1,18 +1,25 @@
 import { Metadata } from 'next'
-import { redirect } from 'next/navigation'
+import { generatePageMetadata } from '@/lib/metadata'
+import OverviewPage from './overview/page'
 
-// Since root redirects to /overview, set canonical to /overview
-export const metadata: Metadata = {
-  alternates: {
-    canonical: 'https://bigdata.ilmora.uz/overview',
-  },
-  robots: {
-    index: false, // Don't index the redirect page
-    follow: true,
-  },
-}
+// Root page metadata - canonical URL points to root
+export const metadata: Metadata = generatePageMetadata(
+  'Classic Models Analytics Dashboard',
+  'Comprehensive data analytics platform exploring naming conventions, spelling patterns, and textual characteristics within the Classic Models database. 30+ SQL queries, 40+ visualizations, and deep insights into database patterns.',
+  '', // Empty path means root URL
+  [
+    'analytics dashboard',
+    'data visualization',
+    'database analysis',
+    'SQL queries',
+    'naming conventions',
+    'textual patterns',
+    'data insights',
+  ]
+)
 
-// Server-side redirect to /overview
+// Root page renders overview content directly (no redirect)
+// This ensures Google can index the root URL properly
 export default function Home() {
-  redirect('/overview')
+  return <OverviewPage />
 }

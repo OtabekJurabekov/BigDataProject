@@ -39,7 +39,7 @@ export const defaultMetadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: `${siteUrl}/overview`, // Root redirects to overview
+    url: siteUrl, // Root URL is the main page
     siteName: siteName,
     title: siteName,
     description: defaultDescription,
@@ -79,7 +79,7 @@ export const defaultMetadata: Metadata = {
     // google: 'your-verification-code',
   },
   alternates: {
-    canonical: `${siteUrl}/overview`, // Root redirects to overview, so canonical is overview
+    canonical: siteUrl, // Root URL is canonical
   },
 }
 
