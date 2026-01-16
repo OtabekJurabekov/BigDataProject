@@ -30,9 +30,9 @@ export default function MetricCard({
 
   return (
     <motion.div
-      initial={isMobile ? false : { opacity: 0, y: 20, scale: 0.95 }}
-      animate={isMobile ? {} : { opacity: 1, y: 0, scale: 1 }}
-      transition={isMobile ? {} : { 
+      initial={isMobile ? { opacity: 1 } : { opacity: 0, y: 20, scale: 0.95 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={isMobile ? { duration: 0 } : { 
         delay: delay * 0.3,
         type: "spring",
         stiffness: 100,
@@ -129,9 +129,9 @@ export default function MetricCard({
           {trend && (
             <motion.span 
               className="text-[10px] sm:text-xs font-bold text-white px-2 sm:px-2.5 md:px-3 py-1 sm:py-1.5 rounded-md md:rounded-lg backdrop-blur-md flex items-center gap-1"
-              initial={isMobile ? false : { scale: 0.8, opacity: 0 }}
-              animate={isMobile ? {} : { scale: 1, opacity: 1 }}
-              transition={isMobile ? {} : { delay: (delay + 0.2) * 0.3 }}
+              initial={isMobile ? { scale: 1, opacity: 1 } : { scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={isMobile ? { duration: 0 } : { delay: (delay + 0.2) * 0.3 }}
               style={{
                 background: 'linear-gradient(135deg, rgba(16,185,129,0.5) 0%, rgba(5,150,105,0.5) 100%)',
                 boxShadow: '0 2px 12px 0 rgba(16,185,129,0.4), inset 0 1px 0 0 rgba(255,255,255,0.2)',
@@ -149,9 +149,9 @@ export default function MetricCard({
           </p>
           <motion.p 
             className="text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-tight"
-            initial={isMobile ? false : { opacity: 0, y: 10 }}
-            animate={isMobile ? {} : { opacity: 1, y: 0 }}
-            transition={isMobile ? {} : { delay: (delay + 0.1) * 0.3 }}
+            initial={isMobile ? { opacity: 1 } : { opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={isMobile ? { duration: 0 } : { delay: (delay + 0.1) * 0.3 }}
           >
             {typeof value === 'number' ? value.toLocaleString() : value}
           </motion.p>

@@ -79,9 +79,9 @@ export default function CommandPalette({ onClose }: CommandPaletteProps) {
         }}
       >
         <motion.div
-          initial={isMobile ? false : { opacity: 0, scale: 0.9, y: -20 }}
-          animate={isMobile ? {} : { opacity: 1, scale: 1, y: 0 }}
-          transition={isMobile ? {} : { duration: 0.2 }}
+          initial={isMobile ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9, y: -20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={isMobile ? { duration: 0 } : { duration: 0.2 }}
           exit={{ opacity: 0, scale: 0.9, y: -20 }}
           onClick={(e) => e.stopPropagation()}
           className="w-full max-w-2xl rounded-2xl border overflow-hidden relative"

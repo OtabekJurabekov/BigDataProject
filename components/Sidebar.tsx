@@ -158,9 +158,9 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
                 }
               }}>
                 <motion.div
-                  initial={isMobile ? false : { opacity: 0, x: -20 }}
-                  animate={isMobile ? {} : { opacity: 1, x: 0 }}
-                  transition={isMobile ? {} : { delay: index * 0.05 }}
+                  initial={isMobile ? { opacity: 1 } : { opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={isMobile ? { duration: 0 } : { delay: index * 0.05 }}
                   whileHover={isMobile ? {} : { x: 6, scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   className={`w-full flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2.5 md:py-3 rounded-xl transition-all cursor-pointer relative overflow-hidden group min-h-[44px] ${

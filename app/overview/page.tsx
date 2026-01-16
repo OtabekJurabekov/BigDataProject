@@ -211,34 +211,34 @@ export default function OverviewPage() {
 
                 <div className="relative z-10 max-w-7xl mx-auto">
                   <motion.div
-                    initial={isMobile ? false : { opacity: 0, y: 20 }}
-                    animate={isMobile ? {} : { opacity: 1, y: 0 }}
-                    transition={isMobile ? {} : { duration: 0.3 }}
+                    initial={isMobile ? { opacity: 1 } : { opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={isMobile ? { duration: 0 } : { duration: 0.3 }}
                     className="text-center mb-12"
                   >
                     <motion.h1
                       className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-extrabold mb-4 md:mb-6"
-                      initial={isMobile ? false : { opacity: 0, scale: 0.9 }}
-                      animate={isMobile ? {} : { opacity: 1, scale: 1 }}
-                      transition={isMobile ? {} : { delay: 0.1, type: "spring", stiffness: 100 }}
+                      initial={isMobile ? { opacity: 1 } : { opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={isMobile ? { duration: 0 } : { delay: 0.1, type: "spring", stiffness: 100 }}
                     >
                       <span className="gradient-text block">Classic Models</span>
                       <span className="text-white block mt-1 md:mt-2 text-2xl sm:text-3xl md:text-6xl lg:text-7xl">Analytics Dashboard</span>
                     </motion.h1>
                     <motion.p
                       className="text-sm sm:text-base md:text-xl lg:text-2xl text-gray-300/90 max-w-3xl mx-auto leading-relaxed mb-4 md:mb-6 px-2"
-                      initial={isMobile ? false : { opacity: 0, y: 10 }}
-                      animate={isMobile ? {} : { opacity: 1, y: 0 }}
-                      transition={isMobile ? {} : { delay: 0.2 }}
+                      initial={isMobile ? { opacity: 1 } : { opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={isMobile ? { duration: 0 } : { delay: 0.2 }}
                     >
                       A comprehensive data analytics platform exploring naming conventions, 
                       spelling patterns, and textual characteristics within the Classic Models database
                     </motion.p>
                     <motion.div
                       className="flex items-center justify-center gap-3"
-                      initial={isMobile ? false : { opacity: 0, y: 10 }}
-                      animate={isMobile ? {} : { opacity: 1, y: 0 }}
-                      transition={isMobile ? {} : { delay: 0.3 }}
+                      initial={isMobile ? { opacity: 1 } : { opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={isMobile ? { duration: 0 } : { delay: 0.3 }}
                     >
                       <motion.div
                         className="px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl md:rounded-2xl relative overflow-hidden group"
@@ -281,18 +281,18 @@ export default function OverviewPage() {
                   {/* Quick Stats */}
                   <motion.div
                     className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 md:gap-4 mb-6 md:mb-12"
-                    initial={isMobile ? false : { opacity: 0, y: 20 }}
-                    animate={isMobile ? {} : { opacity: 1, y: 0 }}
-                    transition={isMobile ? {} : { delay: 0.2 }}
+                    initial={isMobile ? { opacity: 1 } : { opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={isMobile ? { duration: 0 } : { delay: 0.2 }}
                   >
                     {stats.map((stat, index) => {
                       const Icon = stat.icon
                       return (
                         <motion.div
                           key={stat.label}
-                          initial={isMobile ? false : { opacity: 0, scale: 0.9 }}
-                          animate={isMobile ? {} : { opacity: 1, scale: 1 }}
-                          transition={isMobile ? {} : { delay: 0.25 + index * 0.05 }}
+                          initial={isMobile ? { opacity: 1 } : { opacity: 0, scale: 0.9 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={isMobile ? { duration: 0 } : { delay: 0.25 + index * 0.05 }}
                           whileHover={isMobile ? {} : { scale: 1.05, y: -4 }}
                           className="rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-6 relative overflow-hidden group"
                           style={{
@@ -317,10 +317,10 @@ export default function OverviewPage() {
               <section className="px-4 sm:px-6 md:px-8 py-6 sm:py-8 md:py-12 relative">
                 <div className="max-w-7xl mx-auto">
                   <motion.div
-                    initial={isMobile ? false : { opacity: 0, y: 20 }}
-                    whileInView={isMobile ? {} : { opacity: 1, y: 0 }}
+                    initial={isMobile ? { opacity: 1 } : { opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={isMobile ? {} : { delay: 0.1 }}
+                    transition={isMobile ? { duration: 0 } : { delay: 0.1 }}
                     className="mb-6 md:mb-12"
                   >
                     <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 md:mb-6 flex items-center gap-2 md:gap-3">
@@ -350,20 +350,20 @@ export default function OverviewPage() {
                   {/* Features Grid */}
                   <motion.div
                     className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 md:gap-6 mb-6 md:mb-12"
-                    initial={isMobile ? false : { opacity: 0, y: 20 }}
-                    whileInView={isMobile ? {} : { opacity: 1, y: 0 }}
+                    initial={isMobile ? { opacity: 1 } : { opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={isMobile ? {} : { delay: 0.1 }}
+                    transition={isMobile ? { duration: 0 } : { delay: 0.1 }}
                   >
                     {features.map((feature, index) => {
                       const Icon = feature.icon
                       return (
                         <motion.div
                           key={feature.title}
-                          initial={isMobile ? false : { opacity: 0, y: 20 }}
-                          whileInView={isMobile ? {} : { opacity: 1, y: 0 }}
+                          initial={isMobile ? { opacity: 1 } : { opacity: 0, y: 20 }}
+                          whileInView={{ opacity: 1, y: 0 }}
                           viewport={{ once: true }}
-                          transition={isMobile ? {} : { delay: 0.15 + index * 0.05 }}
+                          transition={isMobile ? { duration: 0 } : { delay: 0.15 + index * 0.05 }}
                           whileHover={isMobile ? {} : { scale: 1.02, y: -4 }}
                           className="rounded-xl md:rounded-2xl p-4 sm:p-5 md:p-6 relative overflow-hidden group"
                           style={{
@@ -394,10 +394,10 @@ export default function OverviewPage() {
               <section className="px-4 sm:px-6 md:px-8 py-6 sm:py-8 md:py-12 relative">
                 <div className="max-w-7xl mx-auto">
                   <motion.div
-                    initial={isMobile ? false : { opacity: 0, y: 20 }}
-                    whileInView={isMobile ? {} : { opacity: 1, y: 0 }}
+                    initial={isMobile ? { opacity: 1 } : { opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={isMobile ? {} : { delay: 0.1 }}
+                    transition={isMobile ? { duration: 0 } : { delay: 0.1 }}
                     className="rounded-2xl md:rounded-3xl p-4 sm:p-6 md:p-8 lg:p-12 relative overflow-hidden"
                     style={{
                       background: 'linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.06) 100%)',
@@ -428,19 +428,19 @@ export default function OverviewPage() {
                     <div className="relative z-10">
                       <motion.div
                         className="flex flex-col md:flex-row items-start md:items-center gap-6 mb-8"
-                        initial={isMobile ? false : { opacity: 0, x: -20 }}
-                        whileInView={isMobile ? {} : { opacity: 1, x: 0 }}
+                        initial={isMobile ? { opacity: 1 } : { opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        transition={isMobile ? {} : { delay: 0.1 }}
+                        transition={isMobile ? { duration: 0 } : { delay: 0.1 }}
                       >
                         {/* Profile Image */}
                         <motion.div
                           className="relative group"
-                          initial={isMobile ? false : { opacity: 0, scale: 0.8 }}
-                          whileInView={isMobile ? {} : { opacity: 1, scale: 1 }}
+                          initial={isMobile ? { opacity: 1 } : { opacity: 0, scale: 0.8 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
                           viewport={{ once: true }}
                           whileHover={isMobile ? {} : { scale: 1.05 }}
-                          transition={isMobile ? {} : { type: "spring", stiffness: 200, damping: 15 }}
+                          transition={isMobile ? { duration: 0 } : { type: "spring", stiffness: 200, damping: 15 }}
                         >
                           <div className="absolute inset-0 bg-gradient-to-br from-purple-400 via-cyan-400 to-pink-400 rounded-2xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity" />
                           <div
@@ -480,10 +480,10 @@ export default function OverviewPage() {
                           </div>
                           <motion.div
                             className="flex items-center gap-2 mt-4"
-                            initial={isMobile ? false : { opacity: 0 }}
-                            whileInView={isMobile ? {} : { opacity: 1 }}
+                            initial={isMobile ? { opacity: 1 } : { opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
                             viewport={{ once: true }}
-                            transition={isMobile ? {} : { delay: 0.15 }}
+                            transition={isMobile ? { duration: 0 } : { delay: 0.15 }}
                           >
                             <div className="px-4 py-2 rounded-xl"
                               style={{
@@ -505,10 +505,10 @@ export default function OverviewPage() {
                         {/* Main Bio */}
                         <motion.div
                           className="space-y-2 sm:space-y-3 md:space-y-4 text-xs sm:text-sm md:text-base text-gray-300/90 leading-relaxed"
-                          initial={isMobile ? false : { opacity: 0, y: 20 }}
-                          whileInView={isMobile ? {} : { opacity: 1, y: 0 }}
+                          initial={isMobile ? { opacity: 1 } : { opacity: 0, y: 20 }}
+                          whileInView={{ opacity: 1, y: 0 }}
                           viewport={{ once: true }}
-                          transition={isMobile ? {} : { delay: 0.1 }}
+                          transition={isMobile ? { duration: 0 } : { delay: 0.1 }}
                         >
                           <p>
                             I'm <strong className="text-white">Otabek Jurabekov</strong>, a student at PDP University (Group 24-303) and a professional competitive programmer and mathematician. 
@@ -535,10 +535,10 @@ export default function OverviewPage() {
                         {/* Achievements & Links */}
                         <motion.div
                           className="space-y-4 sm:space-y-5 md:space-y-6"
-                          initial={isMobile ? false : { opacity: 0, y: 20 }}
-                          whileInView={isMobile ? {} : { opacity: 1, y: 0 }}
+                          initial={isMobile ? { opacity: 1 } : { opacity: 0, y: 20 }}
+                          whileInView={{ opacity: 1, y: 0 }}
                           viewport={{ once: true }}
-                          transition={isMobile ? {} : { delay: 0.15 }}
+                          transition={isMobile ? { duration: 0 } : { delay: 0.15 }}
                         >
                           <div>
                             <h3 className="text-base sm:text-lg md:text-xl font-bold text-white mb-3 md:mb-4 flex items-center gap-2">
@@ -551,10 +551,10 @@ export default function OverviewPage() {
                                 return (
                                   <motion.div
                                     key={index}
-                                    initial={isMobile ? false : { opacity: 0, x: -10 }}
-                                    whileInView={isMobile ? {} : { opacity: 1, x: 0 }}
+                                    initial={isMobile ? { opacity: 1 } : { opacity: 0, x: -10 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
                                     viewport={{ once: true }}
-                                    transition={isMobile ? {} : { delay: 0.2 + index * 0.05 }}
+                                    transition={isMobile ? { duration: 0 } : { delay: 0.2 + index * 0.05 }}
                                     className="flex items-center gap-2 sm:gap-3 p-2 sm:p-2.5 md:p-3 rounded-lg md:rounded-xl min-h-[44px]"
                                     style={{
                                       background: 'rgba(255,255,255,0.05)',
@@ -635,10 +635,10 @@ export default function OverviewPage() {
                       return (
                         <Link key={item.name} href={item.href} aria-label={`Navigate to ${item.name} - ${item.desc}`}>
                           <motion.div
-                            initial={isMobile ? false : { opacity: 0, y: 20 }}
-                            whileInView={isMobile ? {} : { opacity: 1, y: 0 }}
+                            initial={isMobile ? { opacity: 1 } : { opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={isMobile ? {} : { delay: index * 0.05 }}
+                            transition={isMobile ? { duration: 0 } : { delay: index * 0.05 }}
                             whileHover={isMobile ? {} : { scale: 1.05, y: -6 }}
                             whileTap={{ scale: 0.98 }}
                             className="rounded-xl md:rounded-2xl p-4 sm:p-5 md:p-6 relative overflow-hidden group cursor-pointer min-h-[120px] sm:min-h-[140px]"
