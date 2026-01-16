@@ -40,6 +40,31 @@ body {
     width: 100% !important;
     max-width: 100% !important;
   }
+  
+  /* Reduce animations on mobile for better performance */
+  * {
+    animation-duration: 0.15s !important;
+    transition-duration: 0.15s !important;
+  }
+  
+  /* Disable continuous background animations on mobile */
+  body::before,
+  body::after,
+  .floating-orb {
+    animation: none !important;
+  }
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 body {

@@ -85,22 +85,24 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
           display: isMobile && !isOpen ? 'none' : 'block',
         }}
       >
-      {/* Animated background gradient */}
-      <motion.div
-        className="absolute inset-0 opacity-30"
-        style={{
-          background: 'linear-gradient(135deg, rgba(139,92,246,0.2) 0%, rgba(6,182,212,0.2) 50%, rgba(236,72,153,0.2) 100%)',
-          backgroundSize: '200% 200%',
-        }}
-        animate={{
-          backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
-        }}
-        transition={{
-          duration: 15,
-          repeat: Infinity,
-          ease: "linear"
-        }}
-      />
+      {/* Animated background gradient - disabled on mobile */}
+      {!isMobile && (
+        <motion.div
+          className="absolute inset-0 opacity-30"
+          style={{
+            background: 'linear-gradient(135deg, rgba(139,92,246,0.2) 0%, rgba(6,182,212,0.2) 50%, rgba(236,72,153,0.2) 100%)',
+            backgroundSize: '200% 200%',
+          }}
+          animate={{
+            backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+        />
+      )}
       
       <div className="flex h-full flex-col relative z-10">
         <div className="flex items-center justify-between p-3 md:p-5 border-b" style={{ borderColor: 'rgba(255,255,255,0.1)' }}>
@@ -156,10 +158,10 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
                 }
               }}>
                 <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  whileHover={{ x: !isMobile ? 6 : 0, scale: !isMobile ? 1.02 : 1 }}
+                  initial={isMobile ? false : { opacity: 0, x: -20 }}
+                  animate={isMobile ? {} : { opacity: 1, x: 0 }}
+                  transition={isMobile ? {} : { delay: index * 0.05 }}
+                  whileHover={isMobile ? {} : { x: 6, scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   className={`w-full flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2.5 md:py-3 rounded-xl transition-all cursor-pointer relative overflow-hidden group min-h-[44px] ${
                     isActive
@@ -188,8 +190,8 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
                     />
                   )}
                   
-                  {/* Animated gradient overlay for active */}
-                  {isActive && (
+                  {/* Animated gradient overlay for active - disabled on mobile */}
+                  {isActive && !isMobile && (
                     <motion.div
                       className="absolute inset-0"
                       style={{
@@ -203,6 +205,14 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
                         duration: 3,
                         repeat: Infinity,
                         ease: "linear"
+                      }}
+                    />
+                  )}
+                  {isActive && isMobile && (
+                    <div
+                      className="absolute inset-0"
+                      style={{
+                        background: `linear-gradient(135deg, ${item.color.replace('from-', 'rgba(').replace('to-', '), ').replace('-', ', ')}0.2)`,
                       }}
                     />
                   )}
@@ -237,8 +247,8 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
                     )}
                   </AnimatePresence>
                   
-                  {/* Shimmer effect on hover */}
-                  {!isActive && (
+                  {/* Shimmer effect on hover - disabled on mobile */}
+                  {!isActive && !isMobile && (
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
                   )}
                 </motion.div>

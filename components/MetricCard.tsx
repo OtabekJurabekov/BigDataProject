@@ -30,18 +30,18 @@ export default function MetricCard({
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20, scale: 0.95 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ 
-        delay,
+      initial={isMobile ? false : { opacity: 0, y: 20, scale: 0.95 }}
+      animate={isMobile ? {} : { opacity: 1, y: 0, scale: 1 }}
+      transition={isMobile ? {} : { 
+        delay: delay * 0.3,
         type: "spring",
         stiffness: 100,
         damping: 15
       }}
-      whileHover={{ 
-        y: !isMobile ? -16 : 0, 
-        scale: !isMobile ? 1.05 : 1,
-        rotate: !isMobile ? 0.5 : 0,
+      whileHover={isMobile ? {} : { 
+        y: -16, 
+        scale: 1.05,
+        rotate: 0.5,
         transition: { 
           type: "spring",
           stiffness: 300,
@@ -63,45 +63,51 @@ export default function MetricCard({
         `,
       }}
     >
-      {/* Animated gradient overlay */}
-      <motion.div 
-        className="absolute inset-0 opacity-0 group-hover:opacity-100"
-        initial={false}
-        style={{
-          background: 'linear-gradient(135deg, rgba(139,92,246,0.25) 0%, rgba(6,182,212,0.25) 50%, rgba(236,72,153,0.25) 100%)',
-          backgroundSize: '200% 200%',
-        }}
-        animate={{
-          backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
-        }}
-        transition={{
-          duration: 4,
-          repeat: Infinity,
-          ease: "linear"
-        }}
-      />
+      {/* Animated gradient overlay - disabled on mobile */}
+      {!isMobile && (
+        <motion.div 
+          className="absolute inset-0 opacity-0 group-hover:opacity-100"
+          initial={false}
+          style={{
+            background: 'linear-gradient(135deg, rgba(139,92,246,0.25) 0%, rgba(6,182,212,0.25) 50%, rgba(236,72,153,0.25) 100%)',
+            backgroundSize: '200% 200%',
+          }}
+          animate={{
+            backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+        />
+      )}
       
-      {/* Glassmorphic shine effect */}
-      <div className="absolute inset-0 bg-gradient-to-br from-white/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      {/* Glassmorphic shine effect - disabled on mobile */}
+      {!isMobile && (
+        <div className="absolute inset-0 bg-gradient-to-br from-white/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      )}
       
-      {/* Animated border glow */}
-      <motion.div
-        className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100"
-        style={{
-          background: 'linear-gradient(135deg, rgba(139,92,246,0.4), rgba(6,182,212,0.4), rgba(236,72,153,0.4))',
-          backgroundSize: '200% 200%',
-          filter: 'blur(20px)',
-          zIndex: -1,
-        }}
-        animate={{
-          backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
-        }}
-        transition={{
-          duration: 3,
-          repeat: Infinity,
-          ease: "linear"
-        }}
-      />
+      {/* Animated border glow - disabled on mobile */}
+      {!isMobile && (
+        <motion.div
+          className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100"
+          style={{
+            background: 'linear-gradient(135deg, rgba(139,92,246,0.4), rgba(6,182,212,0.4), rgba(236,72,153,0.4))',
+            backgroundSize: '200% 200%',
+            filter: 'blur(20px)',
+            zIndex: -1,
+          }}
+          animate={{
+            backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+        />
+      )}
       
       <div className="relative z-10">
         <div className="flex items-center justify-between mb-3 sm:mb-4 md:mb-5">
@@ -123,9 +129,9 @@ export default function MetricCard({
           {trend && (
             <motion.span 
               className="text-[10px] sm:text-xs font-bold text-white px-2 sm:px-2.5 md:px-3 py-1 sm:py-1.5 rounded-md md:rounded-lg backdrop-blur-md flex items-center gap-1"
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ delay: delay + 0.2 }}
+              initial={isMobile ? false : { scale: 0.8, opacity: 0 }}
+              animate={isMobile ? {} : { scale: 1, opacity: 1 }}
+              transition={isMobile ? {} : { delay: (delay + 0.2) * 0.3 }}
               style={{
                 background: 'linear-gradient(135deg, rgba(16,185,129,0.5) 0%, rgba(5,150,105,0.5) 100%)',
                 boxShadow: '0 2px 12px 0 rgba(16,185,129,0.4), inset 0 1px 0 0 rgba(255,255,255,0.2)',
@@ -143,50 +149,54 @@ export default function MetricCard({
           </p>
           <motion.p 
             className="text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-tight"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: delay + 0.1 }}
+            initial={isMobile ? false : { opacity: 0, y: 10 }}
+            animate={isMobile ? {} : { opacity: 1, y: 0 }}
+            transition={isMobile ? {} : { delay: (delay + 0.1) * 0.3 }}
           >
             {typeof value === 'number' ? value.toLocaleString() : value}
           </motion.p>
         </div>
       </div>
 
-      {/* Animated shimmer effect */}
-      <motion.div 
-        className="absolute inset-0 -translate-x-full group-hover:translate-x-full"
-        style={{
-          background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.15) 50%, transparent 100%)',
-          width: '50%',
-        }}
-        transition={{
-          duration: 0.8,
-          ease: "easeInOut"
-        }}
-      />
+      {/* Animated shimmer effect - disabled on mobile */}
+      {!isMobile && (
+        <motion.div 
+          className="absolute inset-0 -translate-x-full group-hover:translate-x-full"
+          style={{
+            background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.15) 50%, transparent 100%)',
+            width: '50%',
+          }}
+          transition={{
+            duration: 0.8,
+            ease: "easeInOut"
+          }}
+        />
+      )}
       
-      {/* Subtle particles effect */}
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-        {[...Array(3)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-white rounded-full"
-            style={{
-              left: `${20 + i * 30}%`,
-              top: `${30 + i * 20}%`,
-            }}
-            animate={{
-              y: [0, -20, 0],
-              opacity: [0, 1, 0],
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              delay: i * 0.3,
-            }}
-          />
-        ))}
-      </div>
+      {/* Subtle particles effect - disabled on mobile */}
+      {!isMobile && (
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+          {[...Array(3)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-1 h-1 bg-white rounded-full"
+              style={{
+                left: `${20 + i * 30}%`,
+                top: `${30 + i * 20}%`,
+              }}
+              animate={{
+                y: [0, -20, 0],
+                opacity: [0, 1, 0],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                delay: i * 0.3,
+              }}
+            />
+          ))}
+        </div>
+      )}
     </motion.div>
   )
 }

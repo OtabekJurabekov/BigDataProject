@@ -278,9 +278,9 @@ export default function ChartCard({
   if (title) {
     return (
       <motion.div
-        initial={{ opacity: 0, y: 20, scale: 0.95 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ delay }}
+        initial={isMobile ? false : { opacity: 0, y: 20, scale: 0.95 }}
+        animate={isMobile ? {} : { opacity: 1, y: 0, scale: 1 }}
+        transition={isMobile ? {} : { delay: delay * 0.3 }}
         className="group rounded-xl md:rounded-2xl p-4 sm:p-5 md:p-6 overflow-hidden relative"
         style={{
           background: 'linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.06) 100%)',
@@ -293,9 +293,9 @@ export default function ChartCard({
             0 0 80px -20px rgba(139, 92, 246, 0.15)
           `,
         }}
-        whileHover={{
-          scale: !isMobile ? 1.01 : 1,
-          y: !isMobile ? -4 : 0,
+        whileHover={isMobile ? {} : {
+          scale: 1.01,
+          y: -4,
           transition: {
             type: "spring",
             stiffness: 300,
@@ -305,9 +305,9 @@ export default function ChartCard({
       >
         <motion.h3 
           className="text-base sm:text-lg md:text-xl font-bold mb-3 sm:mb-4 md:mb-6 text-white relative z-10 flex items-center gap-2 md:gap-3"
-          initial={{ opacity: 0, x: -10 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: delay + 0.1 }}
+          initial={isMobile ? false : { opacity: 0, x: -10 }}
+          animate={isMobile ? {} : { opacity: 1, x: 0 }}
+          transition={isMobile ? {} : { delay: (delay + 0.1) * 0.3 }}
         >
           <span className="gradient-text">{title}</span>
         </motion.h3>

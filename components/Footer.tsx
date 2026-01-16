@@ -9,10 +9,16 @@ export default function Footer() {
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768)
+    const checkMobile = () => {
+      if (typeof window !== 'undefined') {
+        setIsMobile(window.innerWidth < 768)
+      }
+    }
     checkMobile()
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', checkMobile)
+      return () => window.removeEventListener('resize', checkMobile)
+    }
   }, [])
 
   const links = {
@@ -63,18 +69,19 @@ export default function Footer() {
             <div>
               <motion.h3 
                 className="text-base sm:text-lg font-bold text-white mb-3 sm:mb-4 flex items-center gap-2"
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={isMobile ? false : { opacity: 0, y: 10 }}
+                whileInView={isMobile ? {} : { opacity: 1, y: 0 }}
                 viewport={{ once: true }}
+                transition={isMobile ? {} : { delay: 0.05 }}
               >
                 <span className="gradient-text">Classic Models Analytics</span>
               </motion.h3>
               <motion.p 
                 className="text-xs sm:text-sm text-gray-300/80 leading-relaxed"
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={isMobile ? false : { opacity: 0, y: 10 }}
+                whileInView={isMobile ? {} : { opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.1 }}
+                transition={isMobile ? {} : { delay: 0.05 }}
               >
                 A comprehensive data analytics dashboard analyzing naming conventions, 
                 spelling patterns, and textual characteristics within the Classic Models database.
@@ -85,9 +92,10 @@ export default function Footer() {
             <div>
               <motion.h3 
                 className="text-xs sm:text-sm font-semibold text-white mb-3 sm:mb-4 uppercase tracking-wider"
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={isMobile ? false : { opacity: 0, y: 10 }}
+                whileInView={isMobile ? {} : { opacity: 1, y: 0 }}
                 viewport={{ once: true }}
+                transition={isMobile ? {} : { delay: 0.05 }}
               >
                 Navigation
               </motion.h3>
@@ -95,10 +103,10 @@ export default function Footer() {
                 {links.navigation.map((link, index) => (
                   <motion.li
                     key={link.name}
-                    initial={{ opacity: 0, x: -10 }}
-                    whileInView={{ opacity: 1, x: 0 }}
+                    initial={isMobile ? false : { opacity: 0, x: -10 }}
+                    whileInView={isMobile ? {} : { opacity: 1, x: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: index * 0.05 }}
+                    transition={isMobile ? {} : { delay: index * 0.02 }}
                   >
                     <a
                       href={link.href}
@@ -117,9 +125,10 @@ export default function Footer() {
             <div>
               <motion.h3 
                 className="text-xs sm:text-sm font-semibold text-white mb-3 sm:mb-4 uppercase tracking-wider"
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={isMobile ? false : { opacity: 0, y: 10 }}
+                whileInView={isMobile ? {} : { opacity: 1, y: 0 }}
                 viewport={{ once: true }}
+                transition={isMobile ? {} : { delay: 0.05 }}
               >
                 Connect
               </motion.h3>
@@ -132,11 +141,11 @@ export default function Footer() {
                       href={link.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
+                      initial={isMobile ? false : { opacity: 0, scale: 0.8 }}
+                      whileInView={isMobile ? {} : { opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
-                      transition={{ delay: index * 0.05 }}
-                      whileHover={{ scale: !isMobile ? 1.1 : 1, y: !isMobile ? -2 : 0 }}
+                      transition={isMobile ? {} : { delay: index * 0.02 }}
+                      whileHover={isMobile ? {} : { scale: 1.1, y: -2 }}
                       whileTap={{ scale: 0.95 }}
                       className="p-2 sm:p-2.5 rounded-lg md:rounded-xl transition-all group relative overflow-hidden min-w-[44px] min-h-[44px] flex items-center justify-center"
                       style={{
@@ -160,9 +169,10 @@ export default function Footer() {
           <motion.div 
             className="pt-4 sm:pt-6 md:pt-8 border-t flex flex-col md:flex-row justify-between items-center gap-3 sm:gap-4"
             style={{ borderColor: 'rgba(255,255,255,0.1)' }}
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            initial={isMobile ? false : { opacity: 0 }}
+            whileInView={isMobile ? {} : { opacity: 1 }}
             viewport={{ once: true }}
+            transition={isMobile ? {} : { delay: 0.05 }}
           >
             <div className="text-xs sm:text-sm text-gray-400 text-center md:text-left">
               <p>

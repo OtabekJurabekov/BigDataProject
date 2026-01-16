@@ -191,17 +191,17 @@ export default function Dashboard() {
 
       {/* Quick Navigation */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.4 }}
+        initial={isMobile ? false : { opacity: 0, y: 20 }}
+        animate={isMobile ? {} : { opacity: 1, y: 0 }}
+        transition={isMobile ? {} : { delay: 0.2 }}
         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-3.5 md:gap-4"
       >
         <Link href="/customers" aria-label="Navigate to customer analytics page">
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            whileHover={{ scale: !isMobile ? 1.05 : 1, x: !isMobile ? 6 : 0, y: !isMobile ? -2 : 0 }}
+            initial={isMobile ? false : { opacity: 0, y: 10 }}
+            animate={isMobile ? {} : { opacity: 1, y: 0 }}
+            transition={isMobile ? {} : { delay: 0.25 }}
+            whileHover={isMobile ? {} : { scale: 1.05, x: 6, y: -2 }}
             whileTap={{ scale: 0.98 }}
             className="group rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-5 overflow-hidden cursor-pointer relative min-h-[80px] sm:min-h-[100px]"
             style={{
@@ -211,21 +211,23 @@ export default function Dashboard() {
               boxShadow: '0 8px 32px 0 rgba(0,0,0,0.3), inset 0 1px 0 0 rgba(255,255,255,0.25)',
             }}
           >
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 opacity-0 group-hover:opacity-100"
-              style={{
-                background: 'linear-gradient(135deg, rgba(139,92,246,0.25) 0%, rgba(6,182,212,0.25) 100%)',
-                backgroundSize: '200% 200%',
-              }}
-              animate={{
-                backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: "linear"
-              }}
-            />
+            {!isMobile && (
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 opacity-0 group-hover:opacity-100"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(139,92,246,0.25) 0%, rgba(6,182,212,0.25) 100%)',
+                  backgroundSize: '200% 200%',
+                }}
+                animate={{
+                  backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "linear"
+                }}
+              />
+            )}
             <div className="flex items-center justify-between relative z-10">
               <div className="flex items-center gap-2 sm:gap-2.5 md:gap-3">
                 <motion.div
@@ -240,22 +242,24 @@ export default function Dashboard() {
                 </motion.div>
                 <span className="text-white font-semibold text-sm sm:text-base md:text-lg">Customers</span>
               </div>
-              <motion.div
-                animate={{ x: [0, 4, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-                className="hidden sm:block"
-              >
-                <ArrowRight className="text-gray-400 group-hover:text-white transition-colors md:w-5 md:h-5" size={18} aria-hidden="true" />
-              </motion.div>
+              {!isMobile && (
+                <motion.div
+                  animate={{ x: [0, 4, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                  className="hidden sm:block"
+                >
+                  <ArrowRight className="text-gray-400 group-hover:text-white transition-colors md:w-5 md:h-5" size={18} aria-hidden="true" />
+                </motion.div>
+              )}
             </div>
           </motion.div>
         </Link>
         <Link href="/products" aria-label="Navigate to product analytics page">
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
-            whileHover={{ scale: !isMobile ? 1.05 : 1, x: !isMobile ? 6 : 0, y: !isMobile ? -2 : 0 }}
+            initial={isMobile ? false : { opacity: 0, y: 10 }}
+            animate={isMobile ? {} : { opacity: 1, y: 0 }}
+            transition={isMobile ? {} : { delay: 0.3 }}
+            whileHover={isMobile ? {} : { scale: 1.05, x: 6, y: -2 }}
             whileTap={{ scale: 0.98 }}
             className="group rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-5 overflow-hidden cursor-pointer relative min-h-[80px] sm:min-h-[100px]"
             style={{
@@ -265,21 +269,23 @@ export default function Dashboard() {
               boxShadow: '0 8px 32px 0 rgba(0,0,0,0.3), inset 0 1px 0 0 rgba(255,255,255,0.25)',
             }}
           >
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-pink-500/20 opacity-0 group-hover:opacity-100"
-              style={{
-                background: 'linear-gradient(135deg, rgba(139,92,246,0.25) 0%, rgba(236,72,153,0.25) 100%)',
-                backgroundSize: '200% 200%',
-              }}
-              animate={{
-                backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: "linear"
-              }}
-            />
+            {!isMobile && (
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-pink-500/20 opacity-0 group-hover:opacity-100"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(139,92,246,0.25) 0%, rgba(236,72,153,0.25) 100%)',
+                  backgroundSize: '200% 200%',
+                }}
+                animate={{
+                  backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "linear"
+                }}
+              />
+            )}
             <div className="flex items-center justify-between relative z-10">
               <div className="flex items-center gap-2 sm:gap-2.5 md:gap-3">
                 <motion.div
@@ -306,10 +312,10 @@ export default function Dashboard() {
         </Link>
         <Link href="/offices" aria-label="Navigate to office analytics page">
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7 }}
-            whileHover={{ scale: !isMobile ? 1.05 : 1, x: !isMobile ? 6 : 0, y: !isMobile ? -2 : 0 }}
+            initial={isMobile ? false : { opacity: 0, y: 10 }}
+            animate={isMobile ? {} : { opacity: 1, y: 0 }}
+            transition={isMobile ? {} : { delay: 0.35 }}
+            whileHover={isMobile ? {} : { scale: 1.05, x: 6, y: -2 }}
             whileTap={{ scale: 0.98 }}
             className="group rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-5 overflow-hidden cursor-pointer relative min-h-[80px] sm:min-h-[100px]"
             style={{
@@ -319,21 +325,23 @@ export default function Dashboard() {
               boxShadow: '0 8px 32px 0 rgba(0,0,0,0.3), inset 0 1px 0 0 rgba(255,255,255,0.25)',
             }}
           >
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 opacity-0 group-hover:opacity-100"
-              style={{
-                background: 'linear-gradient(135deg, rgba(59,130,246,0.25) 0%, rgba(6,182,212,0.25) 100%)',
-                backgroundSize: '200% 200%',
-              }}
-              animate={{
-                backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: "linear"
-              }}
-            />
+            {!isMobile && (
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 opacity-0 group-hover:opacity-100"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(59,130,246,0.25) 0%, rgba(6,182,212,0.25) 100%)',
+                  backgroundSize: '200% 200%',
+                }}
+                animate={{
+                  backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "linear"
+                }}
+              />
+            )}
             <div className="flex items-center justify-between relative z-10">
               <div className="flex items-center gap-2 sm:gap-2.5 md:gap-3">
                 <motion.div
@@ -360,10 +368,10 @@ export default function Dashboard() {
         </Link>
         <Link href="/employees" aria-label="Navigate to employee analytics page">
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8 }}
-            whileHover={{ scale: !isMobile ? 1.05 : 1, x: !isMobile ? 6 : 0, y: !isMobile ? -2 : 0 }}
+            initial={isMobile ? false : { opacity: 0, y: 10 }}
+            animate={isMobile ? {} : { opacity: 1, y: 0 }}
+            transition={isMobile ? {} : { delay: 0.4 }}
+            whileHover={isMobile ? {} : { scale: 1.05, x: 6, y: -2 }}
             whileTap={{ scale: 0.98 }}
             className="group rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-5 overflow-hidden cursor-pointer relative min-h-[80px] sm:min-h-[100px]"
             style={{
@@ -373,21 +381,23 @@ export default function Dashboard() {
               boxShadow: '0 8px 32px 0 rgba(0,0,0,0.3), inset 0 1px 0 0 rgba(255,255,255,0.25)',
             }}
           >
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-pink-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100"
-              style={{
-                background: 'linear-gradient(135deg, rgba(236,72,153,0.25) 0%, rgba(139,92,246,0.25) 100%)',
-                backgroundSize: '200% 200%',
-              }}
-              animate={{
-                backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: "linear"
-              }}
-            />
+            {!isMobile && (
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-pink-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(236,72,153,0.25) 0%, rgba(139,92,246,0.25) 100%)',
+                  backgroundSize: '200% 200%',
+                }}
+                animate={{
+                  backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "linear"
+                }}
+              />
+            )}
             <div className="flex items-center justify-between relative z-10">
               <div className="flex items-center gap-2 sm:gap-2.5 md:gap-3">
                 <motion.div

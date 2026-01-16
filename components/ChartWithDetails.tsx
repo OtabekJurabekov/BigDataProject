@@ -48,9 +48,9 @@ export default function ChartWithDetails({
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay }}
+      initial={isMobile ? false : { opacity: 0, y: 20 }}
+      animate={isMobile ? {} : { opacity: 1, y: 0 }}
+      transition={isMobile ? {} : { delay: delay * 0.3 }}
       className="rounded-xl md:rounded-2xl overflow-hidden"
       style={{
         background: 'linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.06) 100%)',
@@ -63,9 +63,9 @@ export default function ChartWithDetails({
           0 0 80px -20px rgba(139, 92, 246, 0.15)
         `,
       }}
-      whileHover={{
-        scale: !isMobile ? 1.005 : 1,
-        y: !isMobile ? -2 : 0,
+      whileHover={isMobile ? {} : {
+        scale: 1.005,
+        y: -2,
         transition: {
           type: "spring",
           stiffness: 300,
@@ -146,7 +146,7 @@ export default function ChartWithDetails({
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: isMobile ? 0.15 : 0.3 }}
             className="overflow-hidden border-t"
             style={{ borderColor: 'rgba(255,255,255,0.1)' }}
           >
@@ -161,9 +161,9 @@ export default function ChartWithDetails({
                     {insights.map((insight, index) => (
                       <motion.li
                         key={index}
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: index * 0.1 }}
+                        initial={isMobile ? false : { opacity: 0, x: -10 }}
+                        animate={isMobile ? {} : { opacity: 1, x: 0 }}
+                        transition={isMobile ? {} : { delay: index * 0.05 }}
                         className="text-xs sm:text-sm text-gray-300/90 flex items-start gap-1.5 sm:gap-2"
                       >
                         <span className="text-purple-400 mt-0.5 sm:mt-1">•</span>
@@ -197,7 +197,7 @@ export default function ChartWithDetails({
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: isMobile ? 0.15 : 0.3 }}
             className="overflow-hidden border-t"
             style={{ borderColor: 'rgba(255,255,255,0.1)' }}
           >

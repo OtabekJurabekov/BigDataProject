@@ -23,6 +23,16 @@ const commands = [
 export default function CommandPalette({ onClose }: CommandPaletteProps) {
   const [search, setSearch] = useState('')
   const [selectedIndex, setSelectedIndex] = useState(0)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(typeof window !== 'undefined' && window.innerWidth < 768)
+    checkMobile()
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', checkMobile)
+      return () => window.removeEventListener('resize', checkMobile)
+    }
+  }, [])
 
   const filteredCommands = commands.filter((cmd) =>
     cmd.label.toLowerCase().includes(search.toLowerCase()) ||
@@ -59,6 +69,7 @@ export default function CommandPalette({ onClose }: CommandPaletteProps) {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
+        transition={{ duration: isMobile ? 0.15 : 0.3 }}
         exit={{ opacity: 0 }}
         className="fixed inset-0 z-50 flex items-start justify-center pt-[15vh] px-4"
         onClick={onClose}
@@ -68,8 +79,9 @@ export default function CommandPalette({ onClose }: CommandPaletteProps) {
         }}
       >
         <motion.div
-          initial={{ opacity: 0, scale: 0.9, y: -20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
+          initial={isMobile ? false : { opacity: 0, scale: 0.9, y: -20 }}
+          animate={isMobile ? {} : { opacity: 1, scale: 1, y: 0 }}
+          transition={isMobile ? {} : { duration: 0.2 }}
           exit={{ opacity: 0, scale: 0.9, y: -20 }}
           onClick={(e) => e.stopPropagation()}
           className="w-full max-w-2xl rounded-2xl border overflow-hidden relative"
@@ -106,12 +118,16 @@ export default function CommandPalette({ onClose }: CommandPaletteProps) {
           />
           
           <div className="flex items-center gap-3 px-5 py-4 border-b relative" style={{ borderColor: 'rgba(255,255,255,0.1)' }}>
-            <motion.div
-              animate={{ rotate: [0, 360] }}
-              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            >
+            {!isMobile ? (
+              <motion.div
+                animate={{ rotate: [0, 360] }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              >
+                <Search className="text-purple-400" size={22} />
+              </motion.div>
+            ) : (
               <Search className="text-purple-400" size={22} />
-            </motion.div>
+            )}
             <input
               type="text"
               value={search}
@@ -128,7 +144,7 @@ export default function CommandPalette({ onClose }: CommandPaletteProps) {
             />
             <motion.button
               onClick={onClose}
-              whileHover={{ scale: 1.1, rotate: 90 }}
+              whileHover={!isMobile ? { scale: 1.1, rotate: 90 } : {}}
               whileTap={{ scale: 0.9 }}
               className="p-2 rounded-lg hover:bg-white/10 transition-colors text-gray-400 hover:text-white"
               aria-label="Close command palette"
@@ -144,7 +160,7 @@ export default function CommandPalette({ onClose }: CommandPaletteProps) {
                   <motion.a
                     key={cmd.id}
                     href={cmd.href}
-                    whileHover={{ x: 4 }}
+                    whileHover={!isMobile ? { x: 4 } : {}}
                     className={`w-full px-5 py-3.5 text-left flex items-center justify-between transition-all relative ${
                       index === selectedIndex
                         ? 'text-white'
