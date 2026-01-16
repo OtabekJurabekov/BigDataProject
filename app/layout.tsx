@@ -2,7 +2,13 @@ import type { Metadata } from 'next'
 import './globals.css'
 import { defaultMetadata } from '@/lib/metadata'
 
-export const metadata: Metadata = defaultMetadata
+// Update canonical URL to root for the root layout
+export const metadata: Metadata = {
+  ...defaultMetadata,
+  alternates: {
+    canonical: 'https://bigdata.ilmora.uz', // Root URL is canonical
+  },
+}
 
 export default function RootLayout({
   children,

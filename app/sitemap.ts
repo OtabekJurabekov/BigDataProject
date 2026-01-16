@@ -5,7 +5,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const currentDate = new Date().toISOString()
 
   const routes = [
-    '/overview', // Root redirects to overview, so only include overview
+    '', // Root page (shows overview content)
+    '/overview', // Overview page (same content, different route)
     '/dashboard',
     '/customers',
     '/products',
